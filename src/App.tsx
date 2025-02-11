@@ -3,7 +3,6 @@ import logo from "./logo.svg";
 import "./App.scss";
 
 function App() {
-  console.log("HEllo");
   return (
     <div className="App">
       <header className="App-header">
