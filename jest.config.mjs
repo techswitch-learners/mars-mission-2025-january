@@ -1,5 +1,5 @@
 const config = {
-  setupFilesAfterEnv: ["<rootDir>/jest-setup.js"],
+  setupFilesAfterEnv: ["<rootDir>/src/setupTests.ts"],
 };
 
 export default config;
