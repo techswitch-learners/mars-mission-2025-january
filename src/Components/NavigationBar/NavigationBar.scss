@@ -1,0 +1,9 @@
+.mobile-menu {
+    display: none;
+}
+
+@media (max-width: 320px) {
+    .mobile-menu {
+      display: flex;
+    }
+}
