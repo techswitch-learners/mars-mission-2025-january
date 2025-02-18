@@ -1,6 +1,13 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import "./MarsRoverImageSearchHeader.scss";
+import { SolarDateSelection } from "../SolarDateSelection/SolarDateSelection.tsx";
+import { EarthDateValue, SolarDate } from "../../types.ts";
+import { getActiveStartDate, getYesterday } from "../../utils.ts";
+import { CameraSelection } from "../CameraSelection/CameraSelection.tsx";
+import { fetchData } from "../../fetch.ts";
 
 interface ManifestModel {
   photo_manifest: {
@@ -22,46 +29,37 @@ interface Photo {
   cameras: [];
 }
 
-type ValuePiece = Date | null;
-
-type Value = ValuePiece | [ValuePiece, ValuePiece];
-
-enum SolarDate {
-  SOL = "sol",
-  EARTH = "earth",
-}
-
 export const MarsRoverImageSearchHeader = () => {
   const [manifestData, setManifestData] = useState<ManifestModel | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
-  const [sol, setSol] = useState<string>("");
-  const [cameras, setCameras] = useState([]);
-  const [earthDate, setEarthDate] = useState<Value>(new Date());
+  //TODO: next states should probably go to the Rover page to wire up this component with the image selector
   const [solarDate, setSolarDate] = useState(SolarDate.SOL);
-  const roverName: string = "curiosity"; //TODO: need to change for /rover/:roverId
+  const [solDate, setSolDate] = useState<string>("");
+  const [earthDate, setEarthDate] = useState<EarthDateValue>(new Date());
+  const [cameras, setCameras] = useState([]);
+  //TODO: need to change for /rover/:roverId after adding Router
+  const roverName: string = "curiosity";
+
   const min = 0;
   const max = manifestData?.photo_manifest?.max_sol ?? 1;
 
-  const handleChange = (event) => {
-    const sol = event.target.value;
-
-    if (sol === "" || (Number(sol) >= 0 && Number(sol) <= max)) {
-      setSol(sol);
-    }
-  };
-
   useEffect(() => {
-    fetch(`https://mars-photos.herokuapp.com/api/v1/manifests/${roverName}`)
-      .then((response) => response.json())
-      .then((data) => setManifestData(data))
-      .catch(() => {
-        setError(true);
-        console.error(error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    if (roverName) {
+      fetchData(
+        `https://mars-photos.herokuapp.com/api/v1/manifests/${roverName}`,
+      )
+        .then((data) => {
+          setManifestData(data);
+        })
+        .catch((error) => {
+          setError(true);
+          console.error(error);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
   }, []);
 
   useEffect(() => {
@@ -69,13 +67,25 @@ export const MarsRoverImageSearchHeader = () => {
 
     if (solarDate === SolarDate.SOL) {
       for (const photos of photoData) {
-        if (photos.sol === Number(sol)) {
+        if (photos.sol === Number(solDate)) {
           setCameras(photos.cameras);
         }
       }
     }
     //TODO: add earth date connection
-  }, [sol, earthDate, manifestData]);
+  }, [solDate, earthDate, manifestData]);
+
+  const handleChangeSolInput = (event) => {
+    const sol = event.target.value;
+
+    if (sol === "" || (Number(sol) >= min && Number(sol) <= max)) {
+      setSolDate(sol);
+    }
+  };
+
+  const handleChangeSolarDate = (date: SolarDate): void => {
+    setSolarDate(date);
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -85,100 +95,49 @@ export const MarsRoverImageSearchHeader = () => {
     return <div>Service is temporary unavailable</div>;
   }
 
-  const renderCameras = () => (
-    <select id="cameras" name="cameras">
-      {cameras.map((camera, index) => (
-        <option key={`camera-${index}`}>{camera}</option>
-      ))}
-    </select>
-  );
-
-  const getActiveStartDate = () => {
-    const date = manifestData?.photo_manifest?.landing_date;
-
-    if (date) {
-      return new Date(date);
-    }
-
-    return new Date();
-  };
-
-  const getYesterday = () => {
-    const today = new Date();
-    const yesterday = new Date(today);
-    yesterday.setDate(yesterday.getDate() - 1);
-    return yesterday;
-  };
-
   const renderSolInput = () => (
     <div>
       <input
         type="number"
-        value={sol}
+        value={solDate}
         min={min}
         max={max}
-        onChange={handleChange}
+        onChange={handleChangeSolInput}
         name="sol-input"
       />
     </div>
   );
 
   const renderCalendar = () => (
-    <div>
+    <div className="earth-date-calendar">
       <Calendar
         onChange={setEarthDate}
         value={earthDate}
-        activeStartDate={getActiveStartDate()}
+        activeStartDate={getActiveStartDate(
+          manifestData?.photo_manifest?.landing_date,
+        )}
         maxDate={getYesterday()}
       />
     </div>
   );
 
+  const renderDateSelectionPrompt = () => (
+    <p>
+      Please enter the Sol date between {min} and {max} <b>or</b> select an
+      Earth date from the calendar.
+    </p>
+  );
+
   return (
     <div>
       <h1>{manifestData?.photo_manifest?.name ?? ""}</h1>
-      <p>Placeholder image</p>
-      <p>
-        Please enter the sol date between 0 and{" "}
-        {manifestData?.photo_manifest?.max_sol} <b>or</b> select an Earth date
-        from the calendar.
-      </p>
-      <div>
-        <fieldset>
-          <legend>Select Sol or Earth date:</legend>
-          <div>
-            <input
-              type="radio"
-              id="sol"
-              name="sol"
-              value={SolarDate.SOL}
-              checked={solarDate === SolarDate.SOL}
-              onChange={() => setSolarDate(SolarDate.SOL)}
-            />
-            <label htmlFor="sol">Sol</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              id="earth"
-              name="earth"
-              value={SolarDate.EARTH}
-              checked={solarDate === SolarDate.EARTH}
-              onChange={() => setSolarDate(SolarDate.EARTH)}
-            />
-            <label htmlFor="earth">Earth</label>
-          </div>
-        </fieldset>
-        {solarDate === SolarDate.SOL ? renderSolInput() : renderCalendar()}
-      </div>
-      <div>
-        <label htmlFor="cameras">Choose a camera:</label>
-        {cameras ? (
-          renderCameras()
-        ) : (
-          <div>There are no photos for this sol</div>
-        )}
-      </div>
+      {renderDateSelectionPrompt()}
+      <SolarDateSelection
+        solarDate={solarDate}
+        onChangeSolarDate={handleChangeSolarDate}
+      />
+      {solarDate === SolarDate.SOL ? renderSolInput() : renderCalendar()}
+      <CameraSelection cameras={cameras} />
     </div>
   );
 };
