@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import Calendar from 'react-calendar';
 
 interface ManifestModel {
   photo_manifest: {
@@ -21,12 +22,17 @@ interface Photo {
   cameras: [];
 }
 
+type ValuePiece = Date | null;
+
+type Value = ValuePiece | [ValuePiece, ValuePiece];
+
 export const MarsRoverImageSearchHeader = () => {
   const [manifestData, setManifestData] = useState<ManifestModel | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   const [sol, setSol] = useState<string>("");
   const [cameras, setCameras] = useState([]);
+  const [earthDate, setEarthDate] = useState<Value>(new Date());
   const roverName: string = "curiosity"; //TODO: need to change for /rover/:roverId
   const min = 0;
   const max = manifestData?.photo_manifest?.max_sol ?? 1;
@@ -83,21 +89,50 @@ export const MarsRoverImageSearchHeader = () => {
     </select>
   );
 
+  const getActiveStartDate = () => {
+    const date = manifestData?.photo_manifest?.landing_date;
+
+    if (date) {
+      return new Date(date);
+    }
+
+    return new Date();
+  };
+
+  const getYesterday = () => {
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+    return yesterday;
+  };
+
   return (
     <div>
       <h1>{manifestData?.photo_manifest?.name ?? ""}</h1>
       <p>Placeholder image</p>
       <div>
-        Please enter the sol date or select an Earth date from the calendar
+        Please enter the sol date between 0 and{" "}
+        {manifestData?.photo_manifest?.max_sol} or select an Earth date from the
+        calendar.
+        <div>
+          <input
+            type="number"
+            value={sol}
+            min={min}
+            max={max}
+            onChange={handleChange}
+            name="sol-input"
+          />
+        </div>
+        <div>
+          <Calendar
+            onChange={setEarthDate}
+            value={earthDate}
+            activeStartDate={getActiveStartDate()}
+            maxDate={getYesterday()}
+          />
+        </div>
       </div>
-      <input
-        type="number"
-        value={sol}
-        min={min}
-        max={max}
-        onChange={handleChange}
-        name="sol-input"
-      />
       <div>
         <label htmlFor="cameras">Choose a camera:</label>
         {cameras ? (
