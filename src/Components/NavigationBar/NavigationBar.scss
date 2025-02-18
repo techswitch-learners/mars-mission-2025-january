@@ -1,9 +1,29 @@
 .mobile-menu {
-    display: none;
+   display: none;
+}
+
+.navigation-links-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
 }
 
 @media (max-width: 320px) {
     .mobile-menu {
-      display: flex;
+      display: flex;      
     }
+  
+  .navigation-links-container {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    height: auto;
+    width: 0;
+    right: 0;
+    top:0;
+  }
+  .navigation-link {
+    display: none;
+  }
 }
