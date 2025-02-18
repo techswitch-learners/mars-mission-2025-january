@@ -1,0 +1,36 @@
+*{
+    background-color:  black;
+    color: white;
+    list-style-type: none;
+    text-decoration: none;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+ 
+
+ul{
+    display: flex;
+    flex-wrap: wrap;
+    width: 60%;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+li{
+    display: flex;
+    direction: column;
+    justify-content: center;
+    align-items: center;
+    width:40%;
+    aspect-ratio: 1;
+}
+
+img{
+    width: 60%;
+}
