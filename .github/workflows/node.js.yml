@@ -5,15 +5,10 @@ name: Node.js CI
 
 on:
   push:
-    # branches: [ "main" ]
-    branches: [ "#2-setup-github-actions-workflow" ]
-    # branches: 
-    #   - "**" #for all branches
+    branches: [ "**" ]
   pull_request:
-    # branches: [ "main" ]
-    branches: [ "#2-setup-github-actions-workflow" ]
-    # branches:
-    #   - "**" #for all branches    
+    branches: [ "**" ]
+    
 jobs:
   build:
 
