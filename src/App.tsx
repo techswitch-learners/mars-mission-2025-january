@@ -10,12 +10,10 @@ function App() {
       <Router>
           <NavigationBar />
           <Routes>            
-              {/* Add routes to homepage and each rover
-              <Route path="/" element={<Home />} />
-              <Route path = "/rover/:roverName" element={<Rover/> } />   */}
           </Routes>
       </Router>
     </div>
+
   );
 }
 

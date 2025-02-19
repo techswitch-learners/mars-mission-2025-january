@@ -1,11 +1,13 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router';
+import { MemoryRouter, Route, Routes } from 'react-router';
 import ReactDOM from 'react-dom';
 import NavigationBar from "./NavigationBar.tsx";
-import React from 'react';
+import React, { act } from 'react';
+import { createMemoryHistory } from 'history';
 
 describe('Desktop tests', () => {
+    
     test('After rendering navigation bar - the navigation links should be displayed', async () => {
         render(<MemoryRouter> <NavigationBar /></MemoryRouter>);
         expect(await screen.findByText("Home")).toBeVisible;
@@ -15,37 +17,35 @@ describe('Desktop tests', () => {
         expect(await screen.findByText("Opportunity")).toBeVisible;
     });
 
-    
+    test('After rendering navigation bar - the Home link takes to the Home page', async () => {
+        render(<MemoryRouter> <NavigationBar /></MemoryRouter>);
+        fireEvent.click((await screen.findByText("Home")));
+        expect((await screen.findByText("Home")).getAttribute("href")).toContain('/home');
+    });
 
-    // test('After rendering navigation bar - the Home link takes to the Home page', async () => {
-    //     render(<MemoryRouter> <NavigationBar /></MemoryRouter>);
-    //     fireEvent.click((await screen.findByText("Home")));
-    //     expect(await screen.findByText("Mars Rover Explorer")).toBeInTheDocument();
-    // });
+    test('After rendering navigation bar - the Perseverance link takes to the Perseverance page', async () => {
+        render(<MemoryRouter> <NavigationBar /></MemoryRouter>);
+        fireEvent.click((await screen.findByText("Perseverance")));
+        expect((await screen.findByText("Perseverance")).getAttribute("href")).toContain('/perseverance');
+    });
 
-    // test('After rendering navigation bar - the Perseverance link takes to the Perseverance page', async () => {
-    //     render(<MemoryRouter> <NavigationBar /></MemoryRouter>);
-    //     fireEvent.click((await screen.findByText("Perseverance")));
-    //     expect(await screen.findByText("Welcome to perseverance rover page")).toBeInTheDocument();
-    // });
+    test('After rendering navigation bar - the Spirit link takes to the Spirit page', async () => {
+        render(<MemoryRouter> <NavigationBar /></MemoryRouter>);
+        fireEvent.click((await screen.findByText("Spirit")));
+        expect((await screen.findByText("Spirit")).getAttribute("href")).toContain('/spirit');
+    });
 
-    // test('After rendering navigation bar - the Spirit link takes to the Spirit page', async () => {
-    //     render(<MemoryRouter> <NavigationBar /></MemoryRouter>);
-    //     fireEvent.click((await screen.findByText("Spirit")));
-    //     expect(await screen.findByText("Welcome to spirit rover page")).toBeInTheDocument();
-    // });
+    test('After rendering navigation bar - the Curiosity link takes to the Curiosity page', async () => {
+        render(<MemoryRouter> <NavigationBar /></MemoryRouter>);
+        fireEvent.click((await screen.findByText("Curiousity")));
+        expect((await screen.findByText("Curiousity")).getAttribute("href")).toContain('/curiousity');
+    });
 
-    // test('After rendering navigation bar - the Curiosity link takes to the Curiosity page', async () => {
-    //     render(<MemoryRouter> <NavigationBar /></MemoryRouter>);
-    //     fireEvent.click((await screen.findByText("Curiosity")));
-    //     expect(await screen.findByText("Welcome to curiosity rover page")).toBeInTheDocument();
-    // });
-
-    // test('After rendering navigation bar - the Opportunity link takes to the Opportunity page', async () => {
-    //     render(<MemoryRouter> <NavigationBar /></MemoryRouter>);
-    //     fireEvent.click((await screen.findByText("Opportunity")));
-    //     expect(await screen.findByText("Welcome to opportunity rover page")).toBeInTheDocument();       
-    // });
+    test('After rendering navigation bar - the Opportunity link takes to the Opportunity page', async () => {
+        render(<MemoryRouter> <NavigationBar /></MemoryRouter>);
+        fireEvent.click((await screen.findByText("Opportunity")));  
+        expect((await screen.findByText("Opportunity")).getAttribute("href")).toContain('/opportunity');
+    });
    
 });
 
