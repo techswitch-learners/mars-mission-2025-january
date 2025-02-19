@@ -12,14 +12,4 @@ export default [
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
   eslintPluginPrettierRecommended,
-  {
-    rules: {
-      "prettier/prettier": [
-        "error",
-        {
-          endOfLine: "lf",
-        },
-      ],
-    },
-  },
 ];
