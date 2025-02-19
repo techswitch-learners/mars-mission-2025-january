@@ -3,34 +3,37 @@
     color: white;
     list-style-type: none;
     text-decoration: none;
+    padding: 0px;
 }
-.form{
+.title{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
  
-
 ul{
     display: flex;
     flex-wrap: wrap;
-    width: 60%;
-    justify-self: center;
     justify-content: center;
     align-items: center;
+    width:100%
+
+}
+li{
+    
+    display:flex;
+    align-items: center;
+    width:45%;
     
 }
-
-li{
-    display: flex;
-    direction: column;
-    justify-content: center;
-    align-items: center;
-    width:40%;
-    aspect-ratio: 1;
+img{
+   display: flex;
+   width: 30%;
+   height: auto;
+   justify-self: center;
 }
 
-img{
-    width: 60%;
+p{  display: flex;
+    justify-self: center;
 }
