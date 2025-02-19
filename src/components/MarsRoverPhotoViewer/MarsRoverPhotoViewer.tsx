@@ -1,29 +1,28 @@
 import { useEffect, useState } from 'react';
 import React from 'react';
 
-// within same function add sol, date, rover, camera as parameters of the function
-//http://mars-photos.herokuapp.com/api/v1/rovers/<ROVER NAME>Curiosity/photos?earth_date=<SET DATE>2025-02-17&camera=<CAMERA NAME>fhaz
-
-// get the the image sources from json
-
 type MarsRoverPhotoResponse = {
-photos: photos[],
+photos: Photo[],
 };
 
-type photos = [
+type Photo = { 
     id: number,
     sol: number,
-    camera: Array<camera>,
+    camera: Camera,
     img_src: string,
     earth_date: string,
-]
+    rover: Rover
+}
 
-type camera = {
+type Camera = {
     name: string,
     full_name: string,
 }
 
-// create function to call api 
+type Rover = {
+    name: string
+}
+
 export const MarsRoverPhotoViewer = () => {
     const [roverThumbnails, setRoverThumbnails] = useState<MarsRoverPhotoResponse>();
     const [error, setError] = useState<string | null>(null);
@@ -48,37 +47,15 @@ export const MarsRoverPhotoViewer = () => {
         console.log(roverThumbnails)
         return(
             <div>
-            <h1>Temp gallery of rover images</h1>
-            <ul>
-
-            {roverThumbnails}
-               
-            </ul>
+                <h1>Temp gallery of rover images</h1>
+                <ul>
+                    {roverThumbnails.photos.map(photo =>
+                        <li key={photo.id}>
+                            <img src={photo.img_src} alt={`${photo.rover.name}, ${photo.camera.name}, ${photo.id}`}/>
+                        </li>
+                    )}
+                </ul>
             </div>
-
         )
-        
-        
     }
-
-
 }
-
-// {roverThumbnails.photos.map(({id, img_src}: photos, index: number) => {
-//     return (<li key={`roverThumbnails-${index}`}>
-//         <img src= {img_src}/>
-//     </li>
-//     )
-// }
-
-// )}
-
-// {userlist.map(({name, id}: UserModel, index: number) => {
-//     return (<li key={`userlist-${index}`} onClick= {() => handleUserClick(id)}>
-//         <Link to="/userdetails">
-//             {name}
-//         </Link>
-//     </li>)
-// })}
-
-// export default MarsRoverPhotoViewer;
