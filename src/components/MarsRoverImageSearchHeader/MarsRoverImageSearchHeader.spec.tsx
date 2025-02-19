@@ -83,10 +83,9 @@ describe("MarsRoverImageSearchHeader", () => {
       const radios = screen.getAllByRole("radio");
       userEvent.click(radios[1]);
       const calendarContainer = screen.getByTestId("earth-date-calendar");
-      console.log(calendarContainer);
       expect(calendarContainer).toBeVisible();
-      // const calendar = calendarContainer.querySelector(".react-calendar");
-      // expect(calendar).toBeInTheDocument();
+      const calendar = calendarContainer.querySelector(".react-calendar");
+      expect(calendar).toBeInTheDocument();
     });
   });
 });

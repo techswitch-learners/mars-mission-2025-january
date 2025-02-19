@@ -29,7 +29,7 @@ interface Photo {
   cameras: string[];
 }
 
-export const MarsRoverImageSearchHeader = () => {
+export const MarsRoverImageSearchHeader = ({ roverName = "curiosity" }) => {
   const [manifestData, setManifestData] = useState<ManifestModel | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
@@ -39,8 +39,6 @@ export const MarsRoverImageSearchHeader = () => {
   const [earthDate, setEarthDate] = useState<EarthDateValue>(new Date());
   const [cameras, setCameras] = useState<string[]>([]);
   const [selectedCamera, setSelectedCamera] = useState<string>("");
-  //TODO: need to change for /rover/:roverId after adding Router
-  const roverName: string = "curiosity";
 
   const min = 0;
   const max = manifestData?.photo_manifest?.max_sol ?? 1;

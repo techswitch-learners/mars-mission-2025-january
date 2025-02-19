@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.scss";
-import { MarsRoverImageSearchHeader } from "./components/MarsRoverImageSearchHeader/MarsRoverImageSearchHeader.tsx";
+import { Rover } from "./pages/Rover/Rover.tsx";
 
 function App() {
   return (
     <div className="App">
-      <MarsRoverImageSearchHeader />
+      <Rover />
     </div>
   );
 }
