@@ -6,29 +6,27 @@ export const CameraSelection = ({
   selectedCamera,
   onCameraChange,
 }): JSX.Element => {
-  const renderCameras = (cameras) => (
-    <select
-      id="cameras"
-      name="cameras"
-      onChange={(event) => onCameraChange(event?.target.value)}
-      value={selectedCamera}
-    >
-      {cameras.map((camera, index) => (
-        <option key={`camera-${index}`} value={camera}>
-          {camera}
-        </option>
-      ))}
-    </select>
+  const renderCameras = () => (
+    <>
+      <label htmlFor="cameras">Choose a camera:</label>
+      <select
+        id="cameras"
+        name="cameras"
+        onChange={(event) => onCameraChange(event?.target.value)}
+        value={selectedCamera}
+      >
+        {cameras.map((camera, index) => (
+          <option key={`camera-${index}`} value={camera}>
+            {camera}
+          </option>
+        ))}
+      </select>
+    </>
   );
 
+  const renderNoPhotosText = () => <div>There are no photos for this date</div>;
+
   return (
-    <div>
-      <label htmlFor="cameras">Choose a camera:</label>
-      {cameras ? (
-        renderCameras(cameras)
-      ) : (
-        <div>There are no photos for this date</div>
-      )}
-    </div>
+    <div>{cameras.length > 0 ? renderCameras() : renderNoPhotosText()}</div>
   );
-}
+};

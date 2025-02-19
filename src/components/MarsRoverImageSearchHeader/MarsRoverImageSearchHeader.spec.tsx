@@ -15,7 +15,32 @@ describe("MarsRoverImageSearchHeader", () => {
         max_sol: 4457,
         max_date: "2025-02-18",
         total_photos: 699154,
-        photos: [],
+        photos: [
+          {
+            sol: 0,
+            earth_date: "2012-08-06",
+            total_photos: 3702,
+            cameras: ["CHEMCAM", "FHAZ", "MARDI", "RHAZ"],
+          },
+          {
+            sol: 1,
+            earth_date: "2012-08-07",
+            total_photos: 16,
+            cameras: ["MAHLI", "MAST", "NAVCAM"],
+          },
+          {
+            sol: 10,
+            earth_date: "2012-08-16",
+            total_photos: 26,
+            cameras: ["CHEMCAM", "MAHLI", "NAVCAM"],
+          },
+          {
+            sol: 19,
+            earth_date: "2012-08-25",
+            total_photos: 444,
+            cameras: ["CHEMCAM", "MAST"],
+          },
+        ],
       },
     };
 
