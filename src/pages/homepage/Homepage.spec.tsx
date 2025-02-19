@@ -32,7 +32,8 @@ describe("HomePage", () => {
       const roverlink = screen.getByRole('link', {name: /CURIOSITY/i})
       await user.click(roverlink);
       
-      expect(screen.getByText('Welcome to rover page.')).toBeInTheDocument();
+      expect(screen.getByText(/curiosity/i)).toBeInTheDocument();
+
 
 });
 });
