@@ -1,11 +1,22 @@
 import React from "react";
 import { JSX } from "react";
 
-export const CameraSelection = ({ cameras }): JSX.Element => {
+export const CameraSelection = ({
+  cameras,
+  selectedCamera,
+  onCameraChange,
+}): JSX.Element => {
   const renderCameras = (cameras) => (
-    <select id="cameras" name="cameras">
+    <select
+      id="cameras"
+      name="cameras"
+      onChange={(event) => onCameraChange(event?.target.value)}
+      value={selectedCamera}
+    >
       {cameras.map((camera, index) => (
-        <option key={`camera-${index}`}>{camera}</option>
+        <option key={`camera-${index}`} value={camera}>
+          {camera}
+        </option>
       ))}
     </select>
   );

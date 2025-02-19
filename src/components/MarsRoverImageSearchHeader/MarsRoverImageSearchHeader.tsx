@@ -5,7 +5,7 @@ import "react-calendar/dist/Calendar.css";
 import "./MarsRoverImageSearchHeader.scss";
 import { SolarDateSelection } from "../SolarDateSelection/SolarDateSelection.tsx";
 import { EarthDateValue, SolarDate } from "../../types.ts";
-import { getActiveStartDate, getYesterday } from "../../utils.ts";
+import { getMinDate, getYesterday } from "../../utils.ts";
 import { CameraSelection } from "../CameraSelection/CameraSelection.tsx";
 import { fetchData } from "../../fetch.ts";
 
@@ -26,7 +26,7 @@ interface Photo {
   sol: number;
   earth_date: string;
   total_photos: 3702;
-  cameras: [];
+  cameras: string[];
 }
 
 export const MarsRoverImageSearchHeader = () => {
@@ -37,7 +37,8 @@ export const MarsRoverImageSearchHeader = () => {
   const [solarDate, setSolarDate] = useState(SolarDate.SOL);
   const [solDate, setSolDate] = useState<string>("");
   const [earthDate, setEarthDate] = useState<EarthDateValue>(new Date());
-  const [cameras, setCameras] = useState([]);
+  const [cameras, setCameras] = useState<string[]>([]);
+  const [selectedCamera, setSelectedCamera] = useState<string>("");
   //TODO: need to change for /rover/:roverId after adding Router
   const roverName: string = "curiosity";
 
@@ -62,17 +63,25 @@ export const MarsRoverImageSearchHeader = () => {
     }
   }, []);
 
+  const isSolRequiredDate = (sol: number): boolean =>
+    solarDate === SolarDate.SOL && sol === Number(solDate);
+
+  const isEarthRequiredDate = (earth_date: string): boolean =>
+    solarDate === SolarDate.EARTH &&
+    new Date(earth_date).getTime() === (earthDate as Date).getTime();
+
   useEffect(() => {
     const photoData = manifestData?.photo_manifest?.photos ?? [];
 
-    if (solarDate === SolarDate.SOL) {
-      for (const photos of photoData) {
-        if (photos.sol === Number(solDate)) {
-          setCameras(photos.cameras);
-        }
+    for (const photos of photoData) {
+      if (
+        isSolRequiredDate(photos.sol) ||
+        isEarthRequiredDate(photos.earth_date)
+      ) {
+        setCameras(photos.cameras);
+        setSelectedCamera(photos.cameras[0]);
       }
     }
-    //TODO: add earth date connection
   }, [solDate, earthDate, manifestData]);
 
   const handleChangeSolInput = (event) => {
@@ -113,9 +122,7 @@ export const MarsRoverImageSearchHeader = () => {
       <Calendar
         onChange={setEarthDate}
         value={earthDate}
-        activeStartDate={getActiveStartDate(
-          manifestData?.photo_manifest?.landing_date,
-        )}
+        minDate={getMinDate(manifestData?.photo_manifest?.landing_date)}
         maxDate={getYesterday()}
       />
     </div>
@@ -137,7 +144,11 @@ export const MarsRoverImageSearchHeader = () => {
         onChangeSolarDate={handleChangeSolarDate}
       />
       {solarDate === SolarDate.SOL ? renderSolInput() : renderCalendar()}
-      <CameraSelection cameras={cameras} />
+      <CameraSelection
+        cameras={cameras}
+        selectedCamera={selectedCamera}
+        onCameraChange={setSelectedCamera}
+      />
     </div>
   );
 };

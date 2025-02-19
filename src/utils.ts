@@ -6,7 +6,7 @@ export const getYesterday = (): Date => {
   return yesterday;
 };
 
-export const getActiveStartDate = (date?: string): Date => {
+export const getMinDate = (date?: string): Date => {
   if (date) {
     return new Date(date);
   }
