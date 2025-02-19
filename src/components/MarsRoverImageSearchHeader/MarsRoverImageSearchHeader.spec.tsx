@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, waitFor, within } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { MarsRoverImageSearchHeader } from "./MarsRoverImageSearchHeader";
 import "@testing-library/jest-dom";
 import { act } from "react";

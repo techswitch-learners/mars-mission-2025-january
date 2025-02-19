@@ -29,7 +29,13 @@ interface Photo {
   cameras: string[];
 }
 
-export const MarsRoverImageSearchHeader = ({ roverName = "curiosity" }) => {
+interface MarsRoverImageSearchHeaderInterface {
+  roverName?: string;
+}
+
+export const MarsRoverImageSearchHeader = ({
+  roverName = "curiosity",
+}: MarsRoverImageSearchHeaderInterface) => {
   const [manifestData, setManifestData] = useState<ManifestModel | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);

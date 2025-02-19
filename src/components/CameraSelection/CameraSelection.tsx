@@ -1,11 +1,17 @@
 import React from "react";
 import { JSX } from "react";
 
+interface CameraSelectionInterface {
+  cameras: string[];
+  selectedCamera: string;
+  onCameraChange: React.Dispatch<React.SetStateAction<string>>;
+}
+
 export const CameraSelection = ({
   cameras,
   selectedCamera,
   onCameraChange,
-}): JSX.Element => {
+}: CameraSelectionInterface): JSX.Element => {
   const renderCameras = () => (
     <>
       <label htmlFor="cameras">Choose a camera:</label>
