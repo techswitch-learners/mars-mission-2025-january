@@ -112,13 +112,13 @@ export const MarsRoverImageSearchHeader = () => {
         min={min}
         max={max}
         onChange={handleChangeSolInput}
-        name="sol-input"
+        name="sol-input-field"
       />
     </div>
   );
 
   const renderCalendar = () => (
-    <div className="earth-date-calendar">
+    <div data-testid="earth-date-calendar" className="earth-date-calendar">
       <Calendar
         onChange={setEarthDate}
         value={earthDate}

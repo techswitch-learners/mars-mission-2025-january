@@ -1,8 +1,9 @@
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import { MarsRoverImageSearchHeader } from "./MarsRoverImageSearchHeader";
 import "@testing-library/jest-dom";
 import { act } from "react";
+import userEvent from "@testing-library/user-event";
 
 describe("MarsRoverImageSearchHeader", () => {
   beforeEach(() => {
@@ -51,14 +52,41 @@ describe("MarsRoverImageSearchHeader", () => {
     });
   });
 
-  it("Renders radio buttons", async () => {
+  it("Renders correct rover name", async () => {
+    act(() => {
+      render(<MarsRoverImageSearchHeader />);
+    });
+
+    await waitFor(() => {
+      const header = screen.getByText(/Curiosity/i);
+      expect(header).toBeVisible();
+    });
+  });
+
+  it("Renders input form on selection for Sol (spinbutton)", async () => {
+    act(() => {
+      render(<MarsRoverImageSearchHeader />);
+    });
+
+    await waitFor(() => {
+      const inputField = screen.getByRole("spinbutton");
+      expect(inputField).toBeVisible();
+    });
+  });
+
+  it("Renders calendar on selection for Earth date", async () => {
     act(() => {
       render(<MarsRoverImageSearchHeader />);
     });
 
     await waitFor(() => {
       const radios = screen.getAllByRole("radio");
-      expect(radios.length).toBe(2);
+      userEvent.click(radios[1]);
+      const calendarContainer = screen.getByTestId("earth-date-calendar");
+      console.log(calendarContainer);
+      expect(calendarContainer).toBeVisible();
+      // const calendar = calendarContainer.querySelector(".react-calendar");
+      // expect(calendar).toBeInTheDocument();
     });
   });
 });
