@@ -1,1 +1,29 @@
-// style thumbnail grid only
+@use "./src/styles/global";
+
+.thumbnails-list-container{
+    .thumbnails-list {
+        display: flex;
+        list-style: none;
+        overflow-x: auto;
+
+        .thumbnail-item {
+            display: flex;
+            flex-direction: row;
+            margin: global.$padding-small;
+            height: 100px;
+            width: 100px;
+            overflow: clip;
+
+            img{
+                object-fit: cover;
+                white-space: nowrap;                
+            }
+        }
+
+    }
+}
+
+@media only screen and( max-width: 1024px){
+    
+}
+ 

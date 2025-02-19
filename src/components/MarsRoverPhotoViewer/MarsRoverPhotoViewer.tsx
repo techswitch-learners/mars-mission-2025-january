@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import React from 'react';
 
-type MarsRoverPhotoResponse = {
+export type MarsRoverPhotoResponse = {
 photos: Photo[],
 };
 
@@ -28,7 +28,7 @@ export const MarsRoverPhotoViewer = () => {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        fetch("https://mars-photos.herokuapp.com/api/v1/rovers/Curiosity/photos?earth_date=2022-04-19&camera=fhaz")
+        fetch("https://mars-photos.herokuapp.com/api/v1/rovers/Curiosity/photos?earth_date=2022-04-19&camera=mast")
         .then(response => response.json())
         .then(result => setRoverThumbnails(result))
         .catch(err => setError(err.message));
@@ -46,11 +46,11 @@ export const MarsRoverPhotoViewer = () => {
     else {
         console.log(roverThumbnails)
         return(
-            <div>
+            <div className='thumbnails-list-container'>
                 <h1>Temp gallery of rover images</h1>
-                <ul>
+                <ul className='thumbnails-list'>
                     {roverThumbnails.photos.map(photo =>
-                        <li key={photo.id}>
+                        <li className='thumbnail-item' key={photo.id}>
                             <img src={photo.img_src} alt={`${photo.rover.name}, ${photo.camera.name}, ${photo.id}`}/>
                         </li>
                     )}
