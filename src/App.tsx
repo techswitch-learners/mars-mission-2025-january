@@ -1,24 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.scss";
+//import Modal from "react-modal";
+import { MarsRoverImageViewerModal } from "./components/MarsRoverImageViewerModal/MarsRoverImageViewerModal.tsx";
 
 function App() {
+  //const [open, setOpen] = useState(true);
+  /* const handleOpen = () => {
+    setOpen(false);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };*/
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <button type="button" onClick={handleOpen}>
+        Click Me to Open Modal
+      </button> */}
+      {/* <Modal isOpen={open} onClose={handleClose} contentLabel="Example Modal">
+        test
+        
+      </Modal> */}
+      <MarsRoverImageViewerModal
+        imageUrl="https://picsum.photos/seed/picsum/200/300"
+        imageData="Rover Image"
+      />
     </div>
   );
 }
