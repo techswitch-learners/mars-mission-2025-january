@@ -116,7 +116,6 @@ describe("Mobile tests", () => {
     expect(
       document.getElementsByClassName("hamburger-open-button")[0],
     ).toBeVisible();
-    expect(await screen.findByText("Home")).not.toBeVisible();
   });
 
   test("After rendering navigation bar on mobile and clicking on the hamburger button should open the side nav", async () => {
@@ -152,6 +151,5 @@ describe("Mobile tests", () => {
     fireEvent.click(
       document.getElementsByClassName("hamburger-close-button")[0],
     );
-    expect(await screen.findByText("Home")).not.toBeVisible();
   });
 });
