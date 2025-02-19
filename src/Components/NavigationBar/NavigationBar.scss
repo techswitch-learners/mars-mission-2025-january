@@ -12,23 +12,23 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin-top: $padding-default
+  margin-top: $padding-default;
+  a {
+    background: $background-secondary;
+    padding: $padding-default;
+    text-align: center;
+    border-radius: 5px;
+    color: $text-secondary;
+    font-family: $font-family;
+    font-size: $font-size-normal;
+    text-decoration: none;
+  }  
+  a:hover {
+    background: $background-success; 
+  }
 }
 
-a {
-  background: $background-secondary;
-  padding: $padding-default;
-  text-align: center;
-  border-radius: 5px;
-  color: $text-secondary;
-  font-family: $font-family;
-  font-size: $font-size-normal;
-  text-decoration: none;
-}
 
-a:hover {
-  background: $background-success; 
-}
 
 @media (max-width: 760px) {
     .mobile-menu {

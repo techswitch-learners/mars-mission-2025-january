@@ -5,10 +5,9 @@ import NavigationBar from "./NavigationBar.tsx";
 import React from "react";
 
 describe("Desktop tests", () => {
-  test("After rendering navigation bar - the navigation links should be displayed", async () => {
+  it("After rendering navigation bar - the navigation links should be displayed", async () => {
     render(
       <MemoryRouter>
-        {" "}
         <NavigationBar />
       </MemoryRouter>,
     );
@@ -19,69 +18,59 @@ describe("Desktop tests", () => {
     expect(await screen.findByText("Opportunity")).toBeVisible();
   });
 
-  test("After rendering navigation bar - the Home link takes to the Home page", async () => {
+  it("After rendering navigation bar - the Home link takes to the Home page", async () => {
     render(
       <MemoryRouter>
-        {" "}
         <NavigationBar />
       </MemoryRouter>,
     );
-    fireEvent.click(await screen.findByText("Home"));
-    expect((await screen.findByText("Home")).getAttribute("href")).toContain(
+    expect((await screen.findByText("Home")).getAttribute("href")).toBe(
       "/home",
     );
   });
 
-  test("After rendering navigation bar - the Perseverance link takes to the Perseverance page", async () => {
+  it("After rendering navigation bar - the Perseverance link takes to the Perseverance page", async () => {
     render(
       <MemoryRouter>
-        {" "}
         <NavigationBar />
       </MemoryRouter>,
     );
-    fireEvent.click(await screen.findByText("Perseverance"));
-    expect(
-      (await screen.findByText("Perseverance")).getAttribute("href"),
-    ).toContain("/perseverance");
-  });
-
-  test("After rendering navigation bar - the Spirit link takes to the Spirit page", async () => {
-    render(
-      <MemoryRouter>
-        {" "}
-        <NavigationBar />
-      </MemoryRouter>,
-    );
-    fireEvent.click(await screen.findByText("Spirit"));
-    expect((await screen.findByText("Spirit")).getAttribute("href")).toContain(
-      "/spirit",
+    expect((await screen.findByText("Perseverance")).getAttribute("href")).toBe(
+      "/rover/perseverance",
     );
   });
 
-  test("After rendering navigation bar - the Curiosity link takes to the Curiosity page", async () => {
+  it("After rendering navigation bar - the Spirit link takes to the Spirit page", async () => {
     render(
       <MemoryRouter>
-        {" "}
         <NavigationBar />
       </MemoryRouter>,
     );
-    fireEvent.click(await screen.findByText("Curiousity"));
-    expect(
-      (await screen.findByText("Curiousity")).getAttribute("href"),
-    ).toContain("/curiousity");
+    expect((await screen.findByText("Spirit")).getAttribute("href")).toBe(
+      "/rover/spirit",
+    );
   });
 
-  test("After rendering navigation bar - the Opportunity link takes to the Opportunity page", async () => {
+  it("After rendering navigation bar - the Curiosity link takes to the Curiosity page", async () => {
     render(
       <MemoryRouter>
-        {" "}
         <NavigationBar />
       </MemoryRouter>,
     );
-    fireEvent.click(await screen.findByText("Opportunity"));
-    expect(
-      (await screen.findByText("Opportunity")).getAttribute("href"),
-    ).toContain("/opportunity");
+    expect((await screen.findByText("Curiousity")).getAttribute("href")).toBe(
+      "/rover/curiousity",
+    );
+  });
+
+  it("After rendering navigation bar - the Opportunity link takes to the Opportunity page", async () => {
+    render(
+      <MemoryRouter>
+        <NavigationBar />
+      </MemoryRouter>,
+    );
+    expect((await screen.findByText("Opportunity")).getAttribute("href")).toBe(
+      "/rover/opportunity",
+    );
   });
 });
 
@@ -106,10 +95,9 @@ describe("Mobile tests", () => {
     }));
   });
 
-  test("After rendering navigation bar on mobile - the side nav hamburger button should be displayed", async () => {
+  it("After rendering navigation bar on mobile - the side nav hamburger button should be displayed", async () => {
     render(
       <MemoryRouter>
-        {" "}
         <NavigationBar />
       </MemoryRouter>,
     );
@@ -118,10 +106,9 @@ describe("Mobile tests", () => {
     ).toBeVisible();
   });
 
-  test("After rendering navigation bar on mobile and clicking on the hamburger button should open the side nav", async () => {
+  it("After rendering navigation bar on mobile and clicking on the hamburger button should open the side nav", async () => {
     render(
       <MemoryRouter>
-        {" "}
         <NavigationBar />
       </MemoryRouter>,
     );
@@ -134,10 +121,9 @@ describe("Mobile tests", () => {
     expect(await screen.findByText("Home")).toBeVisible();
   });
 
-  test("After rendering navigation bar on mobile and clicking on the close button should close the side nav", async () => {
+  it("After rendering navigation bar on mobile and clicking on the close button should close the side nav", async () => {
     render(
       <MemoryRouter>
-        {" "}
         <NavigationBar />
       </MemoryRouter>,
     );
