@@ -1,0 +1,21 @@
+@import '../../styles/global.scss';
+
+.footer {
+    display: none;
+  }
+  
+  @media (min-width: 760px) {
+    .footer {
+      display: block;
+      background-color: $background-secondary;
+      color: $text-secondary;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      text-align: center;
+      overflow: hidden;
+      width: 100%;
+      $font-size-normal: 1rem;
+      $font-family: "Futura","Arial",sans-serif;
+    }
+    }
