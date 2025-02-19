@@ -1,19 +1,16 @@
 import React from "react";
 import "./App.scss";
 import NavigationBar from "./Components/NavigationBar/NavigationBar.tsx";
-import { Route, BrowserRouter as Router, Routes } from "react-router";
-
+import { BrowserRouter as Router, Routes } from "react-router";
 
 function App() {
   return (
     <div className="App">
       <Router>
-          <NavigationBar />
-          <Routes>            
-          </Routes>
+        <NavigationBar />
+        <Routes></Routes>
       </Router>
     </div>
-
   );
 }
 
