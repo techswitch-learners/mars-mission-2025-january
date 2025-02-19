@@ -1,7 +1,6 @@
 name: CI Pipeline
 run-name: ${{ github.actor }} is testing out CI pipeline 🚀
 on: [push,pull_request]
-    branches: [ "**" ]
 jobs:
   test-and-lint:
     runs-on: ubuntu-latest
