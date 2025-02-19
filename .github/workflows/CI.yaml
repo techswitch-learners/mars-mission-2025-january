@@ -1,4 +1,4 @@
-name: GitHub Actions Intro
+name: GitHub Actions
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on:
   push:
@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ "**" ]
 jobs:
-  github-actions-intro:
+  github-actions:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
