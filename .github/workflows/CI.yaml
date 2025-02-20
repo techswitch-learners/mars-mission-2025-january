@@ -19,13 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - name: Discord Webhook Action    
-        uses: ./
+        uses: vani_82919/discord-action@master
         with:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
           content: Discord Notification
-          
-            
-
-
-
-    
