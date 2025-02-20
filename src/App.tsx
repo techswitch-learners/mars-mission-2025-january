@@ -2,7 +2,7 @@ import React from "react";
 import "./App.scss";
 import { Rover } from "./pages/Rover/Rover.tsx";
 import NavigationBar from "./Components/NavigationBar/NavigationBar.tsx";
-import { BrowserRouter as Router, Routes } from "react-router";
+import { Route, BrowserRouter as Router, Routes } from "react-router";
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <Router>
         <NavigationBar />
         <Routes>
-          <Rover />
+          <Route path="/rover/:roverName" element={<Rover />} />
         </Routes>
       </Router>
     </div>

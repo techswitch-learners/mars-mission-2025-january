@@ -37,7 +37,7 @@ function NavigationBar() {
         <Link to="/rover/perseverance" className="navigation-link">
           Perseverance
         </Link>
-        <Link to="/rover/curiousity" className="navigation-link">
+        <Link to="/rover/curiosity" className="navigation-link">
           Curiousity
         </Link>
         <Link to="/rover/spirit" className="navigation-link">

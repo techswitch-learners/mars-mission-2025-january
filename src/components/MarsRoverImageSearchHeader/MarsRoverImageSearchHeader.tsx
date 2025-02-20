@@ -34,7 +34,7 @@ interface MarsRoverImageSearchHeaderInterface {
 }
 
 export const MarsRoverImageSearchHeader = ({
-  roverName = "curiosity",
+  roverName,
 }: MarsRoverImageSearchHeaderInterface) => {
   const [manifestData, setManifestData] = useState<ManifestModel | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
