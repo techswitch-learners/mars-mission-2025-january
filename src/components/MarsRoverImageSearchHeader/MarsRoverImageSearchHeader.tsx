@@ -25,7 +25,7 @@ interface ManifestModel {
 interface Photo {
   sol: number;
   earth_date: string;
-  total_photos: 3702;
+  total_photos: number;
   cameras: string[];
 }
 
