@@ -1,32 +1,27 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
 import "./App.scss";
-//import Modal from "react-modal";
 import { MarsRoverImageViewerModal } from "./components/MarsRoverImageViewerModal/MarsRoverImageViewerModal.tsx";
 
 function App() {
-  //const [open, setOpen] = useState(true);
-  /* const handleOpen = () => {
-    setOpen(false);
+  const [showModal, setShowModal] = useState(false);
+  const toggleModal = () => {
+    setShowModal(!showModal);
   };
-  const handleClose = () => {
-    setOpen(false);
-  };*/
+
   return (
     <div className="App">
-      {/* <button type="button" onClick={handleOpen}>
-        Click Me to Open Modal
-      </button> */}
-      {/* <Modal isOpen={open} onClose={handleClose} contentLabel="Example Modal">
-        test
-        
-      </Modal> */}
-      <MarsRoverImageViewerModal
-        imageUrl="https://picsum.photos/seed/picsum/200/300"
-        imageData="Rover Image"
-      />
+      <button type="button" onClick={toggleModal}>
+        <img src="https://picsum.photos/seed/picsum/70/70" />
+      </button>
+      {showModal && (
+        <MarsRoverImageViewerModal
+          imageUrl="https://picsum.photos/seed/picsum/600/600"
+          imageData="Sample image"
+          showModal={showModal}
+          handleClick={toggleModal}
+        />
+      )}
     </div>
   );
 }
-
 export default App;

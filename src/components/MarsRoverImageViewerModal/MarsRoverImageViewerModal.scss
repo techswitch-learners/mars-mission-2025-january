@@ -1,0 +1,27 @@
+ @import '../../styles/global.scss';
+
+ $max-width:800px;
+
+.modalClass{
+    margin: 100px 70px 80px 345px;
+    max-width: $max-width;
+    outline:none;
+    border:1px solid gray;
+    background-color: $background-secondary;
+    padding: $padding-default +20px;
+    border-radius: $border-radius;
+    
+}
+
+.closeButtonClass{
+    border:none;
+    background-color:$background-secondary;
+    cursor:pointer;
+    position:absolute;
+    top:95px;
+    left:$max-width +$padding-default +50px;
+}
+    
+.imageDescriptionClass{
+    font-size: $font-size-normal;
+}
