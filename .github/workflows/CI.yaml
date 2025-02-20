@@ -1,10 +1,6 @@
 name: CI Pipeline
 run-name: CI Pipeline on ${{ github.ref }} triggered by ${{ github.event_name }}.🚀
-#on: [push,pull_request]
-on: 
-  push:
-    branches:
-      - #18-discord-hook
+on: [push,pull_request]
 jobs:
   lint-build-and-test:
     runs-on: ubuntu-latest
@@ -19,27 +15,14 @@ jobs:
       - run: npm run lint
       - run: npm run build --if-present
       - run: npm test
+  Discord notification:
+    runs-on: ubuntu-latest
     steps: 
-      - name: Discord Webhook Action
-      #if: failure()
+      - name: Discord Webhook Action    
         uses: ./
         with:
           webhook-url: ${{ DISCORD_WEBHOOK }}
           content: Discord Notification for ${{ github.ref }} triggered by ${{ github.event_name }}
-
-
-# name: "Send Discord Notification"
-# run-name: Discord Notification for ${{ github.ref }} triggered by ${{ github.event_name }}.🚀
-# on:
-#   pull_request:    
-#   push:
-#     branches:
-#       - main
-# jobs:
-#   Discord notification:
-#     runs-on: ubuntu-latest
-#     steps: 
-#       - name: Discord Webhook Action
           
             
 
