@@ -1,14 +1,19 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.scss";
+import NavigationBar from "./components/navigationBar/NavigationBar.tsx";
+import { BrowserRouter as Router, Routes, Route } from "react-router";
 import Home from "./pages/homepage/Homepage.tsx";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-      </Routes>
-    </Router>
+    <div className="App">
+      <Router>
+        <NavigationBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 
