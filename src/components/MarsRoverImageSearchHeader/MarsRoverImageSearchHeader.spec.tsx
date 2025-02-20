@@ -2,7 +2,6 @@ import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import { MarsRoverImageSearchHeader } from "./MarsRoverImageSearchHeader";
 import "@testing-library/jest-dom";
-import { act } from "react";
 import userEvent from "@testing-library/user-event";
 
 describe("MarsRoverImageSearchHeader", () => {
@@ -53,9 +52,7 @@ describe("MarsRoverImageSearchHeader", () => {
   });
 
   it("Renders correct rover name", async () => {
-    act(() => {
-      render(<MarsRoverImageSearchHeader roverName={"Curiosity"} />);
-    });
+    render(<MarsRoverImageSearchHeader roverName={"Curiosity"} />);
 
     await waitFor(() => {
       const header = screen.getByText(/Curiosity/i);
@@ -64,10 +61,7 @@ describe("MarsRoverImageSearchHeader", () => {
   });
 
   it("Renders input form on selection for Sol (spinbutton)", async () => {
-    act(() => {
-      render(<MarsRoverImageSearchHeader roverName={"Curiosity"} />);
-    });
-
+    render(<MarsRoverImageSearchHeader roverName={"Curiosity"} />);
     await waitFor(() => {
       const inputField = screen.getByRole("spinbutton");
       expect(inputField).toBeVisible();
@@ -75,33 +69,30 @@ describe("MarsRoverImageSearchHeader", () => {
   });
 
   it("Renders calendar on selection for Earth date", async () => {
-    act(() => {
-      render(<MarsRoverImageSearchHeader roverName={"Curiosity"} />);
-    });
-
+    render(<MarsRoverImageSearchHeader roverName={"Curiosity"} />);
+    let radios = [];
     await waitFor(() => {
-      const radios = screen.getAllByRole("radio");
-      userEvent.click(radios[1]);
-      const calendarContainer = screen.getByTestId("earth-date-calendar");
-      expect(calendarContainer).toBeVisible();
-      const calendar = calendarContainer.querySelector(".react-calendar");
-      expect(calendar).toBeInTheDocument();
+      radios = screen.getAllByRole("radio");
     });
+    await userEvent.click(radios[1]);
+    const calendarContainer = screen.getByTestId("earth-date-calendar");
+    expect(calendarContainer).toBeVisible();
+    const calendar = calendarContainer.querySelector(".react-calendar");
+    expect(calendar).toBeInTheDocument();
   });
 
   it("doesn's show CameraSelection if user has chosen the date without images", async () => {
-    act(() => {
-      render(<MarsRoverImageSearchHeader roverName={"Curiosity"} />);
-    });
+    render(<MarsRoverImageSearchHeader roverName={"Curiosity"} />);
+
+    let inputField;
 
     await waitFor(() => {
-      const inputField = screen.getByRole("spinbutton");
-      userEvent.type(inputField, "3");
-
-      const textElement = screen.getByText(
-        /There are no photos for this date/i,
-      );
-      expect(textElement).toBeVisible();
+      inputField = screen.getByRole("spinbutton");
     });
+
+    await userEvent.type(inputField, "3");
+
+    const textElement = screen.getByText(/There are no photos for this date/i);
+    expect(textElement).toBeVisible();
   });
 });
