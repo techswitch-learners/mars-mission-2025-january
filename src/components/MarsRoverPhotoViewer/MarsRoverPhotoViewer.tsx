@@ -1,61 +1,80 @@
-import { useEffect, useState } from 'react';
-import React from 'react';
-import "./MarsRoverPhotoViewer.scss"
+import { useEffect, useState } from "react";
+import React from "react";
+import "./MarsRoverPhotoViewer.scss";
 
 export type MarsRoverPhotoResponse = {
-photos: Photo[],
+  photos: Photo[];
 };
 
-type Photo = { 
-    id: number,
-    sol: number,
-    camera: Camera,
-    img_src: string,
-    earth_date: string,
-    rover: Rover
-}
+type Photo = {
+  id: number;
+  sol: number;
+  camera: Camera;
+  img_src: string;
+  earth_date: string;
+  rover: Rover;
+};
 
 type Camera = {
-    name: string,
-    full_name: string,
-}
+  name: string;
+  full_name: string;
+};
 
 type Rover = {
-    name: string
-}
+  name: string;
+};
 
-export const MarsRoverPhotoViewer = () => {
-    const [roverThumbnails, setRoverThumbnails] = useState<MarsRoverPhotoResponse>();
-    const [error, setError] = useState<string | null>(null);
+export const MarsRoverPhotoViewer = ({
+  roverName,
+  sol,
+  earth_date,
+  camera,
+}: {
+  roverName: string;
+  sol?: string;
+  earth_date?: string;
+  camera: string;
+}) => {
+  const [roverThumbnails, setRoverThumbnails] =
+    useState<MarsRoverPhotoResponse>();
+  const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-        fetch("https://mars-photos.herokuapp.com/api/v1/rovers/Curiosity/photos?earth_date=2022-04-19&camera=mast")
-        .then(response => response.json())
-        .then(result => setRoverThumbnails(result))
-        .catch(err => setError(err.message));
-    }, []);
-
-    if (error) { 
-        return (<div>Error?</div>)
+  useEffect(() => {
+    let day: string;
+    if (sol) {
+      day = `sol=${sol}`;
+    } else {
+      day = `earth_date=${earth_date}`;
     }
 
-    if (!roverThumbnails) {
-        // to do: add suggestions for another sol/date/camera/rover
-        return (<div>Unable to find images</div>)
-    }
+    fetch(
+      `https://mars-photos.herokuapp.com/api/v1/rovers/${roverName}/photos?${day}&camera=${camera}`,
+    )
+      .then((response) => response.json())
+      .then((result) => setRoverThumbnails(result))
+      .catch((err) => setError(err.message));
+  }, [roverName, sol, earth_date, camera]);
 
-    else {
-        console.log(roverThumbnails)
-        return(
-            <div>
-                <ul className='thumbnails-list'>
-                    {roverThumbnails.photos.map(photo =>
-                        <li className='thumbnail-item' key={photo.id}>
-                            <img src={photo.img_src} alt={`${photo.rover.name}, ${photo.camera.name}, ${photo.id}`}/>
-                        </li>
-                    )}
-                </ul>
-            </div>
-        )
-    }
-}
+  if (error) {
+    return <div>Error?</div>;
+  }
+
+  if (!roverThumbnails) {
+    return <div>Unable to find images</div>;
+  } else {
+    return (
+      <div>
+        <ul className="thumbnails-list">
+          {roverThumbnails.photos.map((photo) => (
+            <li className="thumbnail-item" key={photo.id}>
+              <img
+                src={photo.img_src}
+                alt={`${photo.rover.name}, ${photo.camera.name}, ${photo.id}`}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+};
