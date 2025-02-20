@@ -4,7 +4,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./MarsRoverImageSearchHeader.scss";
 import { DateTypeSelection } from "../DateTypeSelection/DateTypeSelection.tsx";
-import { DateTypes } from "../../types.ts";
+import { DateTypes, EarthDateValue } from "../../types.ts";
 import { getMinDate, getYesterday } from "../../utils.ts";
 import { CameraSelection } from "../CameraSelection/CameraSelection.tsx";
 import { fetchData } from "../../fetch.ts";
@@ -33,8 +33,8 @@ interface MarsRoverImageSearchHeaderInterface {
   roverName?: string;
   selectedSolDate: string;
   setSelectedSolDate: (solDate: string) => void;
-  selectedEarthDate: string;
-  setSelectedEarthDate: (earthDate: string) => void;
+  selectedEarthDate: EarthDateValue;
+  setSelectedEarthDate: (earthDate: EarthDateValue) => void;
   selectedCamera: string;
   setSelectedCamera: (selectedCamera: string) => void;
 }

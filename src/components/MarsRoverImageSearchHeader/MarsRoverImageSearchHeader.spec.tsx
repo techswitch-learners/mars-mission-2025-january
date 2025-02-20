@@ -52,7 +52,7 @@ describe("MarsRoverImageSearchHeader", () => {
     });
   });
 
-  it.only("Renders correct rover name", async () => {
+  it("Renders correct rover name", async () => {
     render(
       <MarsRoverImageSearchHeader
         roverName={"Curiosity"}
@@ -95,7 +95,7 @@ describe("MarsRoverImageSearchHeader", () => {
         roverName={"Curiosity"}
         selectedSolDate={"10"}
         setSelectedSolDate={jest.fn()}
-        selectedEarthDate={"2012-08-07" as unknown as EarthDateValue}
+        selectedEarthDate={new Date()}
         setSelectedEarthDate={jest.fn()}
         selectedCamera={"CHEMCAM"}
         setSelectedCamera={jest.fn()}
@@ -116,11 +116,11 @@ describe("MarsRoverImageSearchHeader", () => {
     render(
       <MarsRoverImageSearchHeader
         roverName={"Curiosity"}
-        selectedSolDate={"10"}
+        selectedSolDate={"3"}
         setSelectedSolDate={jest.fn()}
         selectedEarthDate={"2012-08-07" as unknown as EarthDateValue}
         setSelectedEarthDate={jest.fn()}
-        selectedCamera={"CHEMCAM"}
+        selectedCamera={""}
         setSelectedCamera={jest.fn()}
       />,
     );
