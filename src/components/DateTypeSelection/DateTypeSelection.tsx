@@ -1,15 +1,15 @@
 import React from "react";
 import { JSX } from "react";
-import { SolarDate } from "../../types.ts";
+import { DateTypes } from "../../types.ts";
 
 interface SolarDateSelectionInterface {
-  solarDate: SolarDate;
-  onChangeSolarDate: (date: SolarDate) => void;
+  dateType: DateTypes;
+  onChangeDateType: (date: DateTypes) => void;
 }
 
-export const SolarDateSelection = ({
-  solarDate,
-  onChangeSolarDate,
+export const DateTypeSelection = ({
+  dateType,
+  onChangeDateType,
 }: SolarDateSelectionInterface): JSX.Element => {
   return (
     <fieldset>
@@ -19,9 +19,9 @@ export const SolarDateSelection = ({
           type="radio"
           id="sol"
           name="sol"
-          value={SolarDate.SOL}
-          checked={solarDate === SolarDate.SOL}
-          onChange={() => onChangeSolarDate(SolarDate.SOL)}
+          value={DateTypes.SOL}
+          checked={dateType === DateTypes.SOL}
+          onChange={() => onChangeDateType(DateTypes.SOL)}
         />
         <label htmlFor="sol">Sol</label>
       </div>
@@ -30,9 +30,9 @@ export const SolarDateSelection = ({
           type="radio"
           id="earth"
           name="earth"
-          value={SolarDate.EARTH}
-          checked={solarDate === SolarDate.EARTH}
-          onChange={() => onChangeSolarDate(SolarDate.EARTH)}
+          value={DateTypes.EARTH}
+          checked={dateType === DateTypes.EARTH}
+          onChange={() => onChangeDateType(DateTypes.EARTH)}
         />
         <label htmlFor="earth">Earth</label>
       </div>

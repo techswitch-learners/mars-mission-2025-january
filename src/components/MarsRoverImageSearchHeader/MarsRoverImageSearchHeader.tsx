@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./MarsRoverImageSearchHeader.scss";
-import { SolarDateSelection } from "../SolarDateSelection/SolarDateSelection.tsx";
-import { EarthDateValue, SolarDate } from "../../types.ts";
+import { DateTypeSelection } from "../DateTypeSelection/DateTypeSelection.tsx";
+import { EarthDateValue, DateTypes } from "../../types.ts";
 import { getMinDate, getYesterday } from "../../utils.ts";
 import { CameraSelection } from "../CameraSelection/CameraSelection.tsx";
 import { fetchData } from "../../fetch.ts";
@@ -18,11 +18,11 @@ interface ManifestModel {
     max_sol: number;
     max_date: string;
     total_photos: number;
-    photos: Photo[];
+    photos: RoverDayPhotosDetails[];
   };
 }
 
-interface Photo {
+interface RoverDayPhotosDetails {
   sol: number;
   earth_date: string;
   total_photos: number;
@@ -39,7 +39,7 @@ export const MarsRoverImageSearchHeader = ({
   const [manifestData, setManifestData] = useState<ManifestModel | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
-  const [solarDate, setSolarDate] = useState(SolarDate.SOL);
+  const [dateType, setDateType] = useState(DateTypes.SOL);
   const [solDate, setSolDate] = useState<string>("");
   const [earthDate, setEarthDate] = useState<EarthDateValue>(new Date());
   const [cameras, setCameras] = useState<string[]>([]);
@@ -72,10 +72,10 @@ export const MarsRoverImageSearchHeader = ({
     const photoData = manifestData?.photo_manifest?.photos ?? [];
     let camerasUpdated = false;
     const isSolRequiredDate = (sol: number): boolean =>
-      solarDate === SolarDate.SOL && String(sol) === solDate;
+      dateType === DateTypes.SOL && String(sol) === solDate;
 
     const isEarthRequiredDate = (earth_date: string): boolean =>
-      solarDate === SolarDate.EARTH &&
+      dateType === DateTypes.EARTH &&
       new Date(earth_date).getTime() === (earthDate as Date).getTime();
 
     for (const photos of photoData) {
@@ -94,7 +94,7 @@ export const MarsRoverImageSearchHeader = ({
       setCameras([]);
       setSelectedCamera("");
     }
-  }, [solDate, earthDate, solarDate, manifestData?.photo_manifest?.photos]);
+  }, [solDate, earthDate, dateType, manifestData?.photo_manifest?.photos]);
 
   const handleChangeSolInput = (event) => {
     const sol = event.target.value;
@@ -110,8 +110,8 @@ export const MarsRoverImageSearchHeader = ({
     }
   };
 
-  const handleChangeSolarDate = (date: SolarDate): void => {
-    setSolarDate(date);
+  const handleChangeDateTypes = (date: DateTypes): void => {
+    setDateType(date);
     setSolDate("");
     setEarthDate(new Date());
     setShowCameraSelection(false);
@@ -167,11 +167,11 @@ export const MarsRoverImageSearchHeader = ({
     <div className="mars-rover-image-search-header">
       <h2>{manifestData?.photo_manifest?.name ?? ""}</h2>
       {renderDateSelectionPrompt()}
-      <SolarDateSelection
-        solarDate={solarDate}
-        onChangeSolarDate={handleChangeSolarDate}
+      <DateTypeSelection
+        dateType={dateType}
+        onChangeDateType={handleChangeDateTypes}
       />
-      {solarDate === SolarDate.SOL ? renderSolInput() : renderCalendar()}
+      {dateType === DateTypes.SOL ? renderSolInput() : renderCalendar()}
       {showCameraSelection && (
         <CameraSelection
           cameras={cameras}

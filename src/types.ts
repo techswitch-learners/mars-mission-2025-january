@@ -1,4 +1,4 @@
-export enum SolarDate {
+export enum DateTypes {
   SOL = "sol",
   EARTH = "earth",
 }
