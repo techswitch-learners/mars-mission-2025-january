@@ -40,8 +40,10 @@ export const MarsRoverImageSearchHeader = ({
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   const [dateType, setDateType] = useState(DateTypes.SOL);
-  const [solDate, setSolDate] = useState<string>("");
-  const [earthDate, setEarthDate] = useState<EarthDateValue>(new Date());
+  const [selectedSolDate, setSelectedSolDate] = useState<string>("");
+  const [selectedEarthDate, setSelectedEarthDate] = useState<EarthDateValue>(
+    new Date(),
+  );
   const [cameras, setCameras] = useState<string[]>([]);
   const [selectedCamera, setSelectedCamera] = useState<string>("");
   const [showCameraSelection, setShowCameraSelection] =
@@ -72,11 +74,11 @@ export const MarsRoverImageSearchHeader = ({
     const photoData = manifestData?.photo_manifest?.photos ?? [];
     let camerasUpdated = false;
     const isSolRequiredDate = (sol: number): boolean =>
-      dateType === DateTypes.SOL && String(sol) === solDate;
+      dateType === DateTypes.SOL && String(sol) === selectedSolDate;
 
     const isEarthRequiredDate = (earth_date: string): boolean =>
       dateType === DateTypes.EARTH &&
-      new Date(earth_date).getTime() === (earthDate as Date).getTime();
+      new Date(earth_date).getTime() === (selectedEarthDate as Date).getTime();
 
     for (const photos of photoData) {
       if (
@@ -94,7 +96,12 @@ export const MarsRoverImageSearchHeader = ({
       setCameras([]);
       setSelectedCamera("");
     }
-  }, [solDate, earthDate, dateType, manifestData?.photo_manifest?.photos]);
+  }, [
+    selectedSolDate,
+    selectedEarthDate,
+    dateType,
+    manifestData?.photo_manifest?.photos,
+  ]);
 
   const handleChangeSolInput = (event) => {
     const sol = event.target.value;
@@ -106,19 +113,19 @@ export const MarsRoverImageSearchHeader = ({
     }
 
     if (Number(sol) >= min && Number(sol) <= max) {
-      setSolDate(sol);
+      setSelectedSolDate(sol);
     }
   };
 
   const handleChangeDateTypes = (date: DateTypes): void => {
     setDateType(date);
-    setSolDate("");
-    setEarthDate(new Date());
+    setSelectedSolDate("");
+    setSelectedEarthDate(new Date());
     setShowCameraSelection(false);
   };
 
   const handleChangeCalendar = (value) => {
-    setEarthDate(value);
+    setSelectedEarthDate(value);
     setShowCameraSelection(true);
   };
 
@@ -134,7 +141,7 @@ export const MarsRoverImageSearchHeader = ({
     <div className="sol-input-container">
       <input
         type="number"
-        value={solDate}
+        value={selectedSolDate}
         min={min}
         max={max}
         onChange={handleChangeSolInput}
@@ -147,7 +154,7 @@ export const MarsRoverImageSearchHeader = ({
     <div data-testid="earth-date-calendar" className="earth-date-calendar">
       <Calendar
         onChange={handleChangeCalendar}
-        value={earthDate}
+        value={selectedEarthDate}
         minDate={getMinDate(manifestData?.photo_manifest?.landing_date)}
         maxDate={getYesterday()}
       />
