@@ -131,7 +131,7 @@ export const MarsRoverImageSearchHeader = ({
   }
 
   const renderSolInput = () => (
-    <div>
+    <div className="sol-input-container">
       <input
         type="number"
         value={solDate}
@@ -157,13 +157,15 @@ export const MarsRoverImageSearchHeader = ({
   const renderDateSelectionPrompt = () => (
     <p>
       Please enter the Sol date between {min} and {max} <b>or</b> select an
-      Earth date from the calendar.
+      Earth date from the calendar. The camera selection may change according to
+      your selected date. Note that on some days, the rover did not take photos
+      (for whatever reason) and so no photos will be available for that day!
     </p>
   );
 
   return (
-    <div>
-      <h1>{manifestData?.photo_manifest?.name ?? ""}</h1>
+    <div className="mars-rover-image-search-header">
+      <h2>{manifestData?.photo_manifest?.name ?? ""}</h2>
       {renderDateSelectionPrompt()}
       <SolarDateSelection
         solarDate={solarDate}

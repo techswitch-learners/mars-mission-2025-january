@@ -1,6 +1,15 @@
 @import '../../styles/global.scss';
 
+.mars-rover-image-search-header {
+    padding: $padding-default;
+}
+
+.sol-input-container {
+    padding: $padding-small 0;
+}
+
 .earth-date-calendar {
     display: flex;
     justify-content: center;
+    padding: $padding-small 0;
 }

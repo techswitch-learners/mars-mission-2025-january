@@ -14,7 +14,7 @@ export const CameraSelection = ({
 }: CameraSelectionInterface): JSX.Element => {
   const renderCameras = () => (
     <>
-      <label htmlFor="cameras">Choose a camera:</label>
+      <label htmlFor="cameras">Choose a camera: </label>
       <select
         id="cameras"
         name="cameras"
