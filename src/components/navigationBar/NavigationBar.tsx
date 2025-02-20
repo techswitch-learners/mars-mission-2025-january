@@ -38,7 +38,7 @@ function NavigationBar() {
           Perseverance
         </Link>
         <Link to="/rover/curiosity" className="navigation-link">
-          Curiousity
+          Curiosity
         </Link>
         <Link to="/rover/spirit" className="navigation-link">
           Spirit

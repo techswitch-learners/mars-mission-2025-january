@@ -54,7 +54,7 @@ describe("MarsRoverImageSearchHeader", () => {
 
   it("Renders correct rover name", async () => {
     act(() => {
-      render(<MarsRoverImageSearchHeader />);
+      render(<MarsRoverImageSearchHeader roverName={"Curiosity"} />);
     });
 
     await waitFor(() => {
@@ -65,7 +65,7 @@ describe("MarsRoverImageSearchHeader", () => {
 
   it("Renders input form on selection for Sol (spinbutton)", async () => {
     act(() => {
-      render(<MarsRoverImageSearchHeader />);
+      render(<MarsRoverImageSearchHeader roverName={"Curiosity"} />);
     });
 
     await waitFor(() => {
@@ -76,7 +76,7 @@ describe("MarsRoverImageSearchHeader", () => {
 
   it("Renders calendar on selection for Earth date", async () => {
     act(() => {
-      render(<MarsRoverImageSearchHeader />);
+      render(<MarsRoverImageSearchHeader roverName={"Curiosity"} />);
     });
 
     await waitFor(() => {
@@ -91,7 +91,7 @@ describe("MarsRoverImageSearchHeader", () => {
 
   it("doesn's show CameraSelection if user has chosen the date without images", async () => {
     act(() => {
-      render(<MarsRoverImageSearchHeader />);
+      render(<MarsRoverImageSearchHeader roverName={"Curiosity"} />);
     });
 
     await waitFor(() => {
