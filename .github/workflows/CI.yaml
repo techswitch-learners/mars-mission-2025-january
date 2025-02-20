@@ -15,7 +15,7 @@ jobs:
       - run: npm run lint
       - run: npm run build --if-present
       - run: npm test
-  Discord notification:
+  discord-notifications:
     runs-on: ubuntu-latest
     steps: 
       - name: Discord Webhook Action    
