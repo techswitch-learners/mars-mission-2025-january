@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router";
 import "./Homepage.scss";
 
-
 const rovers = [
   { name: "spirit", image: "/images/spirit.png" },
   { name: "opportunity", image: "/images/opportunity.png" },
@@ -12,11 +11,9 @@ const rovers = [
 
 function Home() {
   return (
-    <div>
-      <div className="title">
-        <h1>Mars Rover Explorer</h1>
-        <p>Select a rover</p>
-      </div>
+    <div className="Page">
+      <h1>Mars Rover Explorer</h1>
+      <p>Choose a rover to explore images</p>
       <ul>
         {rovers.map((rover) => (
           <li key={rover.name}>
@@ -24,7 +21,9 @@ function Home() {
               <div className="roverimage">
                 <img src={rover.image} alt={rover.name} />
               </div>
-              <p>{rover.name.toUpperCase()}</p>
+              <div className="rovertext">
+                <p>{rover.name.toUpperCase()}</p>
+              </div>
             </Link>
           </li>
         ))}
