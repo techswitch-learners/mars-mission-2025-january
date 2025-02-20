@@ -21,7 +21,7 @@ jobs:
       - name: Discord Webhook Action    
         uses: ./
         with:
-          webhook-url: ${{ DISCORD_WEBHOOK }}
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
           content: Discord Notification for ${{ github.ref }} triggered by ${{ github.event_name }}
           
             
