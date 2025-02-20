@@ -21,23 +21,23 @@ jobs:
       - run: npm test
         #if: failure()
         uses: ./
-          with:
+        with:
             webhook-url: ${{ DISCORD_WEBHOOK }}
             content: Discord Notification for ${{ github.ref }} triggered by ${{ github.event_name }}
 
 
-name: "Send Discord Notification"
-run-name: Discord Notification for ${{ github.ref }} triggered by ${{ github.event_name }}.🚀
-on:
-  pull_request:    
-  push:
-    branches:
-      - main
-jobs:
-  Discord notification:
-    runs-on: ubuntu-latest
-    steps: 
-      - name: Discord Webhook Action
+# name: "Send Discord Notification"
+# run-name: Discord Notification for ${{ github.ref }} triggered by ${{ github.event_name }}.🚀
+# on:
+#   pull_request:    
+#   push:
+#     branches:
+#       - main
+# jobs:
+#   Discord notification:
+#     runs-on: ubuntu-latest
+#     steps: 
+#       - name: Discord Webhook Action
           
             
 
