@@ -4,7 +4,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./MarsRoverImageSearchHeader.scss";
 import { DateTypeSelection } from "../DateTypeSelection/DateTypeSelection.tsx";
-import { EarthDateValue, DateTypes } from "../../types.ts";
+import { DateTypes } from "../../types.ts";
 import { getMinDate, getYesterday } from "../../utils.ts";
 import { CameraSelection } from "../CameraSelection/CameraSelection.tsx";
 import { fetchData } from "../../fetch.ts";
@@ -31,21 +31,28 @@ interface RoverDayPhotosDetails {
 
 interface MarsRoverImageSearchHeaderInterface {
   roverName?: string;
+  selectedSolDate: string;
+  setSelectedSolDate: (solDate: string) => void;
+  selectedEarthDate: string;
+  setSelectedEarthDate: (earthDate: string) => void;
+  selectedCamera: string;
+  setSelectedCamera: (selectedCamera: string) => void;
 }
 
 export const MarsRoverImageSearchHeader = ({
   roverName,
+  selectedSolDate,
+  setSelectedSolDate,
+  selectedEarthDate,
+  setSelectedEarthDate,
+  selectedCamera,
+  setSelectedCamera,
 }: MarsRoverImageSearchHeaderInterface) => {
   const [manifestData, setManifestData] = useState<ManifestModel | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   const [dateType, setDateType] = useState(DateTypes.SOL);
-  const [selectedSolDate, setSelectedSolDate] = useState<string>("");
-  const [selectedEarthDate, setSelectedEarthDate] = useState<EarthDateValue>(
-    new Date(),
-  );
   const [cameras, setCameras] = useState<string[]>([]);
-  const [selectedCamera, setSelectedCamera] = useState<string>("");
   const [showCameraSelection, setShowCameraSelection] =
     useState<boolean>(false);
 

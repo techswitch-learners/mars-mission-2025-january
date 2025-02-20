@@ -4,7 +4,7 @@ import { JSX } from "react";
 interface CameraSelectionInterface {
   cameras: string[];
   selectedCamera: string;
-  onCameraChange: React.Dispatch<React.SetStateAction<string>>;
+  onCameraChange: (selectedCamera: string) => void;
 }
 
 export const CameraSelection = ({
