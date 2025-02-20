@@ -1,7 +1,15 @@
 @import '../../styles/global.scss';
 
 .mars-rover-image-search-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: $padding-default;
+
+    label {
+        color: $text-primary;
+    }
 }
 
 .sol-input-container {
@@ -12,4 +20,12 @@
     display: flex;
     justify-content: center;
     padding: $padding-small 0;
+}
+
+.date-type-selection {
+    color: $text-primary;
+}
+
+.cameras-selection {
+    color: $text-primary;
 }

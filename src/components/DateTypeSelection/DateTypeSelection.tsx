@@ -12,7 +12,7 @@ export const DateTypeSelection = ({
   onChangeDateType,
 }: SolarDateSelectionInterface): JSX.Element => {
   return (
-    <fieldset>
+    <fieldset className="date-type-selection">
       <legend>Select Sol or Earth date:</legend>
       <div>
         <input

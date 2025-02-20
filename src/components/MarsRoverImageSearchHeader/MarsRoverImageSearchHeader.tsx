@@ -170,10 +170,10 @@ export const MarsRoverImageSearchHeader = ({
 
   const renderDateSelectionPrompt = () => (
     <p>
-      Please enter the Sol date between {min} and {max} <b>or</b> select an
-      Earth date from the calendar. The camera selection may change according to
-      your selected date. Note that on some days, the rover did not take photos
-      (for whatever reason) and so no photos will be available for that day!
+      Please enter the Sol date between {min} and {max} or select an Earth date
+      from the calendar. The camera selection may change according to selected
+      date. Note that on some days, the rover did not take photos (for whatever
+      reason) and so no photos will be available for that day!
     </p>
   );
 

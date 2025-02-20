@@ -33,6 +33,8 @@ export const CameraSelection = ({
   const renderNoPhotosText = () => <div>There are no photos for this date</div>;
 
   return (
-    <div>{cameras.length > 0 ? renderCameras() : renderNoPhotosText()}</div>
+    <div className="cameras-selection">
+      {cameras.length > 0 ? renderCameras() : renderNoPhotosText()}
+    </div>
   );
 };
