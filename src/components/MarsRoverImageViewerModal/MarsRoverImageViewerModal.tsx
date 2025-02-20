@@ -23,6 +23,7 @@ export function MarsRoverImageViewerModal({
         onRequestClose={handleClick}
         shouldCloseOnOverlayClick={true}
         className="modalClass"
+        ariaHideApp={false}
       >
         <img className="imageClass" src={imageUrl}></img>
         <button className="closeButtonClass" onClick={handleClick}>
