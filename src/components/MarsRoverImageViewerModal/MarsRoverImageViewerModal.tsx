@@ -17,17 +17,19 @@ export function MarsRoverImageViewerModal({
   handleClick,
 }: MarsRoverImageViewerProps) {
   return (
-    <Modal
-      isOpen={showModal}
-      onRequestClose={handleClick}
-      shouldCloseOnOverlayClick={true}
-      className="modalClass"
-    >
-      <img className="imageClass" src={imageUrl}></img>
-      <button className="closeButtonClass" onClick={handleClick}>
-        <SquareX />
-      </button>
-      <p className="imageDescriptionClass">{imageData}</p>
-    </Modal>
+    <div>
+      <Modal
+        isOpen={showModal}
+        onRequestClose={handleClick}
+        shouldCloseOnOverlayClick={true}
+        className="modalClass"
+      >
+        <img className="imageClass" src={imageUrl}></img>
+        <button className="closeButtonClass" onClick={handleClick}>
+          <SquareX />
+        </button>
+        <p className="imageDescriptionClass">{imageData}</p>
+      </Modal>
+    </div>
   );
 }
