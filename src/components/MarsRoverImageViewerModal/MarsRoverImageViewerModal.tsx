@@ -1,7 +1,6 @@
 import React from "react";
 import "./MarsRoverImageViewerModal.scss";
 import Modal from "react-modal";
-//import { SquareX } from "lucide-react";
 
 interface MarsRoverImageViewerProps {
   imageUrl: string;
@@ -25,11 +24,10 @@ export function MarsRoverImageViewerModal({
         className="modalClass"
         ariaHideApp={false}
       >
-        <img className="imageClass" src={imageUrl}></img>
+        <img className="imageClass" src={imageUrl} alt=""></img>
         <button className="closeButtonClass" onClick={handleClick}>
           X
         </button>
-        {/*<SquareX /> */}
         <p className="imageDescriptionClass">{imageData}</p>
       </Modal>
     </div>

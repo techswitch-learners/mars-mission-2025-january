@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App">
       <button type="button" onClick={toggleModal}>
-        <img src="https://picsum.photos/seed/picsum/70/70" />
+        <img src="https://picsum.photos/seed/picsum/70/70" alt="" />
       </button>
       {showModal && (
         <MarsRoverImageViewerModal
