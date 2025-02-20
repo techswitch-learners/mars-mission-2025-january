@@ -3,6 +3,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { MarsRoverImageSearchHeader } from "./MarsRoverImageSearchHeader";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
+import { EarthDateValue } from "../../types";
 
 describe("MarsRoverImageSearchHeader", () => {
   beforeEach(() => {
@@ -51,8 +52,18 @@ describe("MarsRoverImageSearchHeader", () => {
     });
   });
 
-  it("Renders correct rover name", async () => {
-    render(<MarsRoverImageSearchHeader roverName={"Curiosity"} />);
+  it.only("Renders correct rover name", async () => {
+    render(
+      <MarsRoverImageSearchHeader
+        roverName={"Curiosity"}
+        selectedSolDate={"10"}
+        setSelectedSolDate={jest.fn()}
+        selectedEarthDate={"2012-08-07" as unknown as EarthDateValue}
+        setSelectedEarthDate={jest.fn()}
+        selectedCamera={"CHEMCAM"}
+        setSelectedCamera={jest.fn()}
+      />,
+    );
 
     await waitFor(() => {
       const header = screen.getByText(/Curiosity/i);
@@ -61,7 +72,17 @@ describe("MarsRoverImageSearchHeader", () => {
   });
 
   it("Renders input form on selection for Sol (spinbutton)", async () => {
-    render(<MarsRoverImageSearchHeader roverName={"Curiosity"} />);
+    render(
+      <MarsRoverImageSearchHeader
+        roverName={"Curiosity"}
+        selectedSolDate={"10"}
+        setSelectedSolDate={jest.fn()}
+        selectedEarthDate={"2012-08-07" as unknown as EarthDateValue}
+        setSelectedEarthDate={jest.fn()}
+        selectedCamera={"CHEMCAM"}
+        setSelectedCamera={jest.fn()}
+      />,
+    );
     await waitFor(() => {
       const inputField = screen.getByRole("spinbutton");
       expect(inputField).toBeVisible();
@@ -69,7 +90,17 @@ describe("MarsRoverImageSearchHeader", () => {
   });
 
   it("Renders calendar on selection for Earth date", async () => {
-    render(<MarsRoverImageSearchHeader roverName={"Curiosity"} />);
+    render(
+      <MarsRoverImageSearchHeader
+        roverName={"Curiosity"}
+        selectedSolDate={"10"}
+        setSelectedSolDate={jest.fn()}
+        selectedEarthDate={"2012-08-07" as unknown as EarthDateValue}
+        setSelectedEarthDate={jest.fn()}
+        selectedCamera={"CHEMCAM"}
+        setSelectedCamera={jest.fn()}
+      />,
+    );
     let radios = [];
     await waitFor(() => {
       radios = screen.getAllByRole("radio");
@@ -82,7 +113,17 @@ describe("MarsRoverImageSearchHeader", () => {
   });
 
   it("doesn's show CameraSelection if user has chosen the date without images", async () => {
-    render(<MarsRoverImageSearchHeader roverName={"Curiosity"} />);
+    render(
+      <MarsRoverImageSearchHeader
+        roverName={"Curiosity"}
+        selectedSolDate={"10"}
+        setSelectedSolDate={jest.fn()}
+        selectedEarthDate={"2012-08-07" as unknown as EarthDateValue}
+        setSelectedEarthDate={jest.fn()}
+        selectedCamera={"CHEMCAM"}
+        setSelectedCamera={jest.fn()}
+      />,
+    );
 
     let inputField;
 
