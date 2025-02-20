@@ -3,11 +3,9 @@ import "./Footer.scss";
 
 function Footer() {
   return (
-    <div>
-      <footer className="footer">
-        <p>Images provided by NASA Open API</p>
-      </footer>
-    </div>
+    <footer className="footer">
+      <p>Images provided by NASA Open API</p>
+    </footer>
   );
 }
 
