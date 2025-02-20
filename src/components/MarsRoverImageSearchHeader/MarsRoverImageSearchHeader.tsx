@@ -39,12 +39,13 @@ export const MarsRoverImageSearchHeader = ({
   const [manifestData, setManifestData] = useState<ManifestModel | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
-  //TODO: next states should probably go to the Rover page to wire up this component with the image selector
   const [solarDate, setSolarDate] = useState(SolarDate.SOL);
   const [solDate, setSolDate] = useState<string>("");
   const [earthDate, setEarthDate] = useState<EarthDateValue>(new Date());
   const [cameras, setCameras] = useState<string[]>([]);
   const [selectedCamera, setSelectedCamera] = useState<string>("");
+  const [showCameraSelection, setShowCameraSelection] =
+    useState<boolean>(false);
 
   const min = 0;
   const max = manifestData?.photo_manifest?.max_sol ?? 1;
@@ -65,17 +66,17 @@ export const MarsRoverImageSearchHeader = ({
           setIsLoading(false);
         });
     }
-  }, []);
-
-  const isSolRequiredDate = (sol: number): boolean =>
-    solarDate === SolarDate.SOL && sol === Number(solDate);
-
-  const isEarthRequiredDate = (earth_date: string): boolean =>
-    solarDate === SolarDate.EARTH &&
-    new Date(earth_date).getTime() === (earthDate as Date).getTime();
+  }, [roverName]);
 
   useEffect(() => {
     const photoData = manifestData?.photo_manifest?.photos ?? [];
+    let camerasUpdated = false;
+    const isSolRequiredDate = (sol: number): boolean =>
+      solarDate === SolarDate.SOL && String(sol) === solDate;
+
+    const isEarthRequiredDate = (earth_date: string): boolean =>
+      solarDate === SolarDate.EARTH &&
+      new Date(earth_date).getTime() === (earthDate as Date).getTime();
 
     for (const photos of photoData) {
       if (
@@ -84,20 +85,41 @@ export const MarsRoverImageSearchHeader = ({
       ) {
         setCameras(photos.cameras);
         setSelectedCamera(photos.cameras[0]);
+        camerasUpdated = true;
+        break;
       }
     }
-  }, [solDate, earthDate, manifestData]);
+
+    if (!camerasUpdated) {
+      setCameras([]);
+      setSelectedCamera("");
+    }
+  }, [solDate, earthDate, solarDate, manifestData?.photo_manifest?.photos]);
 
   const handleChangeSolInput = (event) => {
     const sol = event.target.value;
 
-    if (sol === "" || (Number(sol) >= min && Number(sol) <= max)) {
+    if (sol === "") {
+      setShowCameraSelection(false);
+    } else {
+      setShowCameraSelection(true);
+    }
+
+    if (Number(sol) >= min && Number(sol) <= max) {
       setSolDate(sol);
     }
   };
 
   const handleChangeSolarDate = (date: SolarDate): void => {
     setSolarDate(date);
+    setSolDate("");
+    setEarthDate(new Date());
+    setShowCameraSelection(false);
+  };
+
+  const handleChangeCalendar = (value) => {
+    setEarthDate(value);
+    setShowCameraSelection(true);
   };
 
   if (isLoading) {
@@ -124,7 +146,7 @@ export const MarsRoverImageSearchHeader = ({
   const renderCalendar = () => (
     <div data-testid="earth-date-calendar" className="earth-date-calendar">
       <Calendar
-        onChange={setEarthDate}
+        onChange={handleChangeCalendar}
         value={earthDate}
         minDate={getMinDate(manifestData?.photo_manifest?.landing_date)}
         maxDate={getYesterday()}
@@ -148,11 +170,13 @@ export const MarsRoverImageSearchHeader = ({
         onChangeSolarDate={handleChangeSolarDate}
       />
       {solarDate === SolarDate.SOL ? renderSolInput() : renderCalendar()}
-      <CameraSelection
-        cameras={cameras}
-        selectedCamera={selectedCamera}
-        onCameraChange={setSelectedCamera}
-      />
+      {showCameraSelection && (
+        <CameraSelection
+          cameras={cameras}
+          selectedCamera={selectedCamera}
+          onCameraChange={setSelectedCamera}
+        />
+      )}
     </div>
   );
 };

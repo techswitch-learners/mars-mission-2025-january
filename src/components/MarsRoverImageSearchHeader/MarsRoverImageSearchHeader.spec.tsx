@@ -88,4 +88,20 @@ describe("MarsRoverImageSearchHeader", () => {
       expect(calendar).toBeInTheDocument();
     });
   });
+
+  it("doesn's show CameraSelection if user has chosen the date without images", async () => {
+    act(() => {
+      render(<MarsRoverImageSearchHeader />);
+    });
+
+    await waitFor(() => {
+      const inputField = screen.getByRole("spinbutton");
+      userEvent.type(inputField, "3");
+
+      const textElement = screen.getByText(
+        /There are no photos for this date/i,
+      );
+      expect(textElement).toBeVisible();
+    });
+  });
 });
