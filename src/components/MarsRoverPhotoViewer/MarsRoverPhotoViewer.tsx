@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import React from 'react';
+import "./MarsRoverPhotoViewer.scss"
 
 export type MarsRoverPhotoResponse = {
 photos: Photo[],
@@ -46,8 +47,7 @@ export const MarsRoverPhotoViewer = () => {
     else {
         console.log(roverThumbnails)
         return(
-            <div className='thumbnails-list-container'>
-                <h1>Temp gallery of rover images</h1>
+            <div>
                 <ul className='thumbnails-list'>
                     {roverThumbnails.photos.map(photo =>
                         <li className='thumbnail-item' key={photo.id}>
