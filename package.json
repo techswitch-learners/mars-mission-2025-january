@@ -6,8 +6,8 @@
     "cra-template-typescript": "1.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-scripts": "5.0.1",
-    "sass": "^1.83.1",
+    "react-router-dom": "^7.1.5",
+    "react-scripts": "^5.0.1",
     "web-vitals": "^2.1.2"
   },
   "scripts": {
@@ -42,7 +42,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
     "@types/jest": "^29.5.14",
-    "@types/react": "^19.0.8",
+    "@types/react": "^19.0.10",
     "@types/sass": "^1.45.0",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.0.1",
@@ -50,6 +50,7 @@
     "globals": "^15.14.0",
     "jest": "^27.5.1",
     "prettier": "3.4.2",
+    "sass": "^1.85.0",
     "typescript-eslint": "^8.20.0"
   }
 }
