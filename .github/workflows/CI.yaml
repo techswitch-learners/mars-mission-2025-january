@@ -22,7 +22,7 @@ jobs:
         uses: ./
         with:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
-          content: Discord Notification for ${{ github.ref }} triggered by ${{ github.event_name }}
+          content: Discord Notification
           
             
 
