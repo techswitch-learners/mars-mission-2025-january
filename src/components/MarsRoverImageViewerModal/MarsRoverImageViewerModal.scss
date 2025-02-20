@@ -29,12 +29,17 @@
 }
 
 .closeButtonClass{
-    border:none;
+    border:2px solid $background-primary;    
     background-color:$background-secondary;
+    color: $background-primary;
     cursor:pointer;
     position:absolute;
-    top:0px;
-    right:2px;
+    top:3px;
+    right:8px;
+    height: 23px;
+    border-radius: 4px;
+    font-size:0.80rem;
+    font-weight:bolder;
 }
     
 .imageDescriptionClass{
