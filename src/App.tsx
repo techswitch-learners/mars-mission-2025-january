@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.scss";
-import NavigationBar from "./Components/NavigationBar/NavigationBar.tsx";
+import NavigationBar from "./components/navigationBar/NavigationBar.tsx";
 import { BrowserRouter as Router, Routes } from "react-router";
 
 function App() {
