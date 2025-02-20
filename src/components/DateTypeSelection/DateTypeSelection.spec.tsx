@@ -1,15 +1,15 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { SolarDateSelection } from "./DateTypeSelection";
+import { DateTypeSelection } from "./DateTypeSelection";
 import { DateTypes } from "../../types";
 import "@testing-library/jest-dom";
 
-describe("Checks that SolarDateSelection component", () => {
+describe("Checks that DateTypeSelection component", () => {
   it("renders legend", () => {
     render(
-      <SolarDateSelection
-        solarDate={DateTypes.SOL}
-        onChangeSolarDate={() => {}}
+      <DateTypeSelection
+        dateType={DateTypes.SOL}
+        onChangeDateType={() => {}}
       />,
     );
 
@@ -19,9 +19,9 @@ describe("Checks that SolarDateSelection component", () => {
 
   it("renders radio buttons", () => {
     render(
-      <SolarDateSelection
-        solarDate={DateTypes.SOL}
-        onChangeSolarDate={() => {}}
+      <DateTypeSelection
+        dateType={DateTypes.SOL}
+        onChangeDateType={() => {}}
       />,
     );
     const radios = screen.getAllByRole("radio");
@@ -30,9 +30,9 @@ describe("Checks that SolarDateSelection component", () => {
 
   it("first radio button is checked", () => {
     render(
-      <SolarDateSelection
-        solarDate={DateTypes.SOL}
-        onChangeSolarDate={() => {}}
+      <DateTypeSelection
+        dateType={DateTypes.SOL}
+        onChangeDateType={() => {}}
       />,
     );
 
