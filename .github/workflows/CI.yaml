@@ -82,6 +82,10 @@ jobs:
       - name: Check if pipeline failed or passed
         id: check-status
         run: |
+          echo "Event: ${{ github.event_name }}"
+          echo "Ref: ${{ github.ref }}"
+          echo "Lint-Build-Test result: ${{ needs.lint-build-and-test.result }}"
+          
           if [[ "${{ github.event_name }}" == 'pull_request' && "${{ needs.lint-build-and-test.result }}" == 'failure' ]]; then
             echo "Pull request failed on ${{ github.ref }}.";
             echo "::set-output name=status::failure";
@@ -91,7 +95,14 @@ jobs:
           elif [[ "${{ github.event_name }}" == 'pull_request' && "${{ github.event.action }}" == 'opened' ]]; then
             echo "New Pull request opened. ${{ github.ref }} ";
             echo "::set-output name=status::success"; 
+          else
+            echo "No matching condition found.";
+            echo "::set-output name=status::none";
           fi
+
+      - name: Debug status output
+        run: echo "Status set to: ${{ steps.check-status.outputs.status }}"
+
       - name: Send Notification to Discord
         if: ${{ steps.check-status.outputs.status == 'failure' || steps.check-status.outputs.status == 'success' }}
         uses: tsickert/discord-webhook@v6.0.0
