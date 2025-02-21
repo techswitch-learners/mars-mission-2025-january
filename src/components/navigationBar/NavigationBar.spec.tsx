@@ -25,7 +25,7 @@ describe("Desktop tests", () => {
       </MemoryRouter>,
     );
     expect((await screen.findByText("Home")).getAttribute("href")).toBe(
-      "/home",
+      "/",
     );
   });
 
