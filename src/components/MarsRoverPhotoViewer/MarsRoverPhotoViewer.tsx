@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import "./MarsRoverPhotoViewer.scss";
+import { EarthDateValue } from "../../types";
 
 export type MarsRoverPhotoResponse = {
   photos: Photo[];
@@ -25,14 +26,14 @@ type Rover = {
 };
 
 export const MarsRoverPhotoViewer = ({
-  roverName,
+  roverName = "Curiosity",
   sol,
   earth_date,
   camera,
 }: {
-  roverName: string;
+  roverName?: string;
   sol?: string;
-  earth_date?: string;
+  earth_date?: EarthDateValue;
   camera: string;
 }) => {
   const [roverThumbnails, setRoverThumbnails] =
@@ -43,15 +44,23 @@ export const MarsRoverPhotoViewer = ({
     let day: string;
     if (sol) {
       day = `sol=${sol}`;
-    } else {
-      day = `earth_date=${earth_date}`;
+    } else if (earth_date) {
+      const date = (earth_date as Date).toISOString().slice(0, 10);
+      day = `earth_date=${date}`;
+    }
+
+    if (!camera) {
+      return;
     }
 
     fetch(
       `https://mars-photos.herokuapp.com/api/v1/rovers/${roverName}/photos?${day}&camera=${camera}`,
     )
       .then((response) => response.json())
-      .then((result) => setRoverThumbnails(result))
+      .then((result) => {
+        setRoverThumbnails(result);
+        setError(null);
+      })
       .catch((err) => setError(err.message));
   }, [roverName, sol, earth_date, camera]);
 
