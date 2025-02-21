@@ -18,7 +18,6 @@ jobs:
   discord-notifications:
     runs-on: ubuntu-latest
     needs: [lint-build-and-test]
-    if: ${{ always() && contains(needs.*.result, 'failure') }}
     steps: 
       - name: Notify Discord if failed
         if: ${{ needs.lint-build-and-test.result == 'failure' }}
