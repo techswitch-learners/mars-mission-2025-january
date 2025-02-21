@@ -25,18 +25,19 @@ jobs:
         with:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
           content: |
-            Discord Notification for ${{ github.ref }} - ${{ github.event_name }} failed. 
-            Commit: ${{ github.sha }} 
+            Discord Notification for ${{ github.ref }} 
             Trigger: ${{ github.event_name }} event
+            Status: Failed.
+            
       - name: Notify Discord if succeeded
         if: ${{ needs.lint-build-and-test.result == 'success' }}
         uses: tsickert/discord-webhook@v6.0.0
         with:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
           content: |
-            Discord Notification for ${{ github.ref }} - ${{ github.event_name }} passed. 
-            Commit: ${{ github.sha }} 
+            Discord Notification for ${{ github.ref }}
             Trigger: ${{ github.event_name }} event
+            Status : Passed.
 
 
 
