@@ -50,15 +50,18 @@
   
     .navigation-links-container {
       flex-direction: column;
+      position: absolute;
       justify-content: center;
       height: auto;
       visibility: hidden;
       overflow-y: hidden;
       width: 50vw;
-      right: 0;
+      left: 0;
       top:0;
     }
-  
+    .navigation-menu {
+      position: relative;
+    }
     .navigation-links-container.show {
       visibility: visible;
     }
