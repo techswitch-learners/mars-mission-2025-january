@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import "./MarsRoverPhotoViewer.scss";
+import { MarsRoverImageViewerModal } from "../MarsRoverImageViewerModal/MarsRoverImageViewerModal";
 
 export type MarsRoverPhotoResponse = {
   photos: Photo[];
@@ -38,6 +39,10 @@ export const MarsRoverPhotoViewer = ({
   const [roverThumbnails, setRoverThumbnails] =
     useState<MarsRoverPhotoResponse>();
   const [error, setError] = useState<string | null>(null);
+  const [showModal, setShowModal] = useState(false);
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
 
   useEffect(() => {
     let day: string;
@@ -66,11 +71,19 @@ export const MarsRoverPhotoViewer = ({
       <div>
         <ul className="thumbnails-list">
           {roverThumbnails.photos.map((photo) => (
-            <li className="thumbnail-item" key={photo.id}>
+            <li className="thumbnail-item" key={photo.id} onClick={toggleModal}>
               <img
                 src={photo.img_src}
                 alt={`${photo.rover.name}, ${photo.camera.name}, ${photo.id}`}
               />
+              {showModal && (
+                <MarsRoverImageViewerModal
+                  imageUrl={photo.img_src}
+                  imageData={`${photo.rover.name} - ${photo.camera.name}`}
+                  showModal={showModal}
+                  handleClick={toggleModal}
+                />
+              )}
             </li>
           ))}
         </ul>

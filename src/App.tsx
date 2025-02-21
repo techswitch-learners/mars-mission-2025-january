@@ -7,11 +7,6 @@ import Footer from "./components/footer/Footer.tsx";
 import Home from "./pages/homepage/Homepage.tsx";
 
 function App() {
-  const [showModal, setShowModal] = useState(false);
-  const toggleModal = () => {
-    setShowModal(!showModal);
-  };
-
   return (
     <div className="App">
       <Router>
