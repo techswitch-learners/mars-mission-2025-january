@@ -106,6 +106,7 @@ export const MarsRoverImageSearchHeader = ({
   }, [
     selectedSolDate,
     selectedEarthDate,
+    setSelectedCamera,
     dateType,
     manifestData?.photo_manifest?.photos,
   ]);
