@@ -1,0 +1,39 @@
+@use "./src/styles/global";
+
+.thumbnails-list {
+    display: flex;
+    list-style: none;
+    overflow-x: auto;
+    padding: 0px;
+
+    .thumbnail-item {
+        display: flex;
+        flex-direction: row;
+        margin: global.$padding-small;
+        overflow: clip;
+
+        img {
+            object-fit: cover;
+            white-space: nowrap;                
+        }
+    }
+}
+
+@media only screen and ( max-width: 1024px){
+    .thumbnails-list {
+        flex-wrap: wrap;
+        justify-content: center;
+
+        .thumbnail-item {
+            height: 80px;
+            width: 80px;
+        }
+    }
+}
+
+@media only screen and ( min-width: 1024px){
+    .thumbnail-item{
+        height: 100px;
+        width: 100px;
+    }
+}

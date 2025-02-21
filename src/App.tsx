@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.scss";
-import { MarsRoverImageViewerModal } from "./components/MarsRoverImageViewerModal/MarsRoverImageViewerModal.tsx";
+import { Rover } from "./pages/Rover/Rover.tsx";
+import { Route, BrowserRouter as Router, Routes } from "react-router";
+import NavigationBar from "./components/navigationBar/NavigationBar.tsx";
+import Footer from "./components/footer/Footer.tsx";
+import Home from "./pages/homepage/Homepage.tsx";
 
 function App() {
   const [showModal, setShowModal] = useState(false);
@@ -10,17 +14,14 @@ function App() {
 
   return (
     <div className="App">
-      <button type="button" onClick={toggleModal}>
-        <img src="https://picsum.photos/seed/picsum/70/70" alt="" />
-      </button>
-      {showModal && (
-        <MarsRoverImageViewerModal
-          imageUrl="https://picsum.photos/seed/picsum/600/600"
-          imageData="Sample image"
-          showModal={showModal}
-          handleClick={toggleModal}
-        />
-      )}
+      <Router>
+        <NavigationBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/rover/:roverName" element={<Rover />} />
+        </Routes>
+        <Footer />
+      </Router>
     </div>
   );
 }
