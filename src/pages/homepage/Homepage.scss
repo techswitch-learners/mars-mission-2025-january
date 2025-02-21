@@ -2,46 +2,73 @@ body{
     background-color: black;
     min-height: 100vh;
     padding:16px;
-    overflow-x: hidden;
 }
-
 h1{
-    font-size: 2.5rem;
+    display: flex;
+    justify-self: center;
+    font-size: 2rem;
     color: white;
+    padding-top: 16px;
+    margin-bottom: 0px;
 }
 
-.title{
-
-    padding-bottom: 16px;
+.rovercontent{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+    justify-self: center;
+    justify-content: center;
+    width: 80%;
+    gap: 0px;
 }
 
 p{  
     display: flex;
-    justify-self: flex-start;
+    justify-self: center;
     color: white;
     font-size: 1rem;
+    margin-top:10px;
 }
 a{
     text-decoration: none;
 }
 
-ul{
+.roversetone{
     list-style-type: none;
     padding-inline-start: 0;
-    padding:8px;
+    margin: 0;
     display: flex;
-    flex-wrap: wrap;
-    justify-self: center;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-width:80%
+    width:25%;
+
+}
+
+.mars{
+   display: flex;
+   flex-grow: 1;
+   width: 30%;
+   justify-self: center;
+}
+
+.roversettwo{
+    list-style-type: none;
+    padding-inline-start: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;;
+    justify-content: center;
+    align-items: center;
+    width:25%
 
 }
 li{
     
     display:flex;
+    flex-grow: 1;
     align-items: center;
-    width:35%;
+    width: 100%;
 
 }
 
@@ -51,10 +78,27 @@ img{
    justify-self: center;
 }
 
+@media (max-width: 760px){ 
+    .rovercontent{
+        display: flex;
+        flex-wrap:wrap;
+        min-height: 80vh;
+    }
+    .roversetone{
+        flex-direction: column;
+        justify-content: center;
+        flex-grow: 1;
 
-@media (max-width: 450px) { 
+    }
+    .roversettwo{
+        flex-direction: column;
+        justify-content: center;
+        flex-grow: 1;
+    }
+
     li{
-        width: 55%;   
+        
+        width: 90%;   
         
     }
     h1{
@@ -65,7 +109,10 @@ img{
         font-size: 0.5rem;
     }
     img{
-       width: 60%
+       width: 90%
+    }
+    .mars{
+        display: none;
     }
     
 }

@@ -31,7 +31,7 @@ function NavigationBar() {
             &times;
           </button>
         </div>
-        <Link to="/home" className="navigation-link">
+        <Link to="/" className="navigation-link">
           Home
         </Link>
         <Link to="/rover/perseverance" className="navigation-link">
