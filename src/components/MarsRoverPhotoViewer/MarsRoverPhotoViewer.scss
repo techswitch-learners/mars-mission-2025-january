@@ -34,6 +34,9 @@
 @media only screen and ( min-width: 1024px){
     .thumbnail-item{
         height: 100px;
-        width: 100px;
+        min-width: 100px;
+        img {
+            width: 100%;
+        }
     }
 }
