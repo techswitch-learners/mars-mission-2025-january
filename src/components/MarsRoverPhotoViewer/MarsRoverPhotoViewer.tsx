@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import React from "react";
 import "./MarsRoverPhotoViewer.scss";
 import { EarthDateValue } from "../../types";
+import { MarsRoverImageViewerModal } from "../MarsRoverImageViewerModal/MarsRoverImageViewerModal.tsx";
 
 export type MarsRoverPhotoResponse = {
   photos: Photo[];
