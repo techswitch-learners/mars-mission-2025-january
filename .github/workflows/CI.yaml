@@ -25,7 +25,7 @@ jobs:
         with:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
           content: Discord Notification for ${{ github.ref }} - ${{ github.event_name }} failed.
-    else: 
+    elif: ${{ always() && contains(needs.*.result, 'success') }} 
     steps: 
       - name: Discord Webhook Action    
         uses: tsickert/discord-webhook@v6.0.0
