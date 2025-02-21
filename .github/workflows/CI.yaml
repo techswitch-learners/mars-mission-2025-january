@@ -20,18 +20,45 @@ jobs:
     needs: [lint-build-and-test]
     if: ${{ always() && contains(needs.*.result, 'failure') }}
     steps: 
-      - name: Discord Webhook Action    
+      - name: Notify Discord if failed
+        if: ${{ needs.lint-build-and-test.result == 'failure' }}
         uses: tsickert/discord-webhook@v6.0.0
         with:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
-          content: Discord Notification for ${{ github.ref }} - ${{ github.event_name }} failed.
-    elif: ${{ always() && contains(needs.*.result, 'success') }} 
-    steps: 
-      - name: Discord Webhook Action    
+          content: |
+            Discord Notification for ${{ github.ref }} - ${{ github.event_name }} failed. 
+            Commit: ${{ github.sha }} 
+            Trigger: ${{ github.event_name }} event
+      - name: Notify Discord if succeeded
+        if: ${{ needs.lint-build-and-test.result == 'success' }}
         uses: tsickert/discord-webhook@v6.0.0
         with:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
-          content: Discord Notification for ${{ github.ref }} - ${{ github.event_name }} passed.
+          content: |
+            Discord Notification for ${{ github.ref }} - ${{ github.event_name }} passed. 
+            Commit: ${{ github.sha }} 
+            Trigger: ${{ github.event_name }} event
+
+
+
+
+
+
+
+
+    
+    #   - name: Discord Webhook Action    
+    #     uses: tsickert/discord-webhook@v6.0.0
+    #     with:
+    #       webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
+    #       content: Discord Notification for ${{ github.ref }} - ${{ github.event_name }} failed.
+    # elif: ${{ always() && contains(needs.*.result, 'success') }} 
+    # steps: 
+    #   - name: Discord Webhook Action    
+    #     uses: tsickert/discord-webhook@v6.0.0
+    #     with:
+    #       webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
+    #       content: Discord Notification for ${{ github.ref }} - ${{ github.event_name }} passed.
 
 
 
