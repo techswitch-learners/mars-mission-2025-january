@@ -2,10 +2,6 @@
 
  $max-width: 800px;
 
-//  .modalContainer {
-//      max-width: $max-width;
-//  }
-
  .modalClass {
      max-width: $max-width;
      margin: 100px 100px 100px 500px;
@@ -19,8 +15,6 @@
 
      @media (max-width: 500px) {
          margin: 100px 5px 30px;
-         //width: 95%;
-        //  max-width: 80%;
      }
  }
 
@@ -47,7 +41,6 @@
      max-width: $max-width - 320px;
      height: auto;
      border-radius: $border-radius;
-    //  object-fit:cover;
      @media(max-width: 500px) {
          width: 100%;
     }
