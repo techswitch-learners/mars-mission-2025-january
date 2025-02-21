@@ -22,7 +22,7 @@ jobs:
       - name: Check if pipeline failed or passed
         id: check-status
         run: |
-          if [[ ${{ github.event_name }} == 'pull_request' && contains(needs.*.result, 'failure') ]]; then
+          if [[ ${{ github.event_name }} == 'pull_request' && contains(lint-build-and-test.result, 'failure') ]]; then
             echo "Pull request failed on ${{ github.ref }}.";
             echo "::set-output name=status::failure";
           elif [[ ${{ github.event_name }} == 'push' && ${{ github.ref }} == 'refs/heads/main' ]]; then
