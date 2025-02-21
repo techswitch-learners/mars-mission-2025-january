@@ -20,7 +20,7 @@ jobs:
     needs: [lint-build-and-test]
     steps: 
       - name: Notify Discord if failed
-        if: ${{ needs.lint-build-and-test.result == 'failure' || needs.lint-build-and-test.result == 'Error'}}
+        if: ${{ always() && contains(needs.*.result, 'failure') }}
         uses: tsickert/discord-webhook@v6.0.0
         with:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
@@ -38,52 +38,3 @@ jobs:
             Discord Notification for ${{ github.ref }}
             Trigger: ${{ github.event_name }} event
             Status : Passed.
-
-
-
-
-
-
-
-
-    
-    #   - name: Discord Webhook Action    
-    #     uses: tsickert/discord-webhook@v6.0.0
-    #     with:
-    #       webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
-    #       content: Discord Notification for ${{ github.ref }} - ${{ github.event_name }} failed.
-    # elif: ${{ always() && contains(needs.*.result, 'success') }} 
-    # steps: 
-    #   - name: Discord Webhook Action    
-    #     uses: tsickert/discord-webhook@v6.0.0
-    #     with:
-    #       webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
-    #       content: Discord Notification for ${{ github.ref }} - ${{ github.event_name }} passed.
-
-
-
-    # id: check-status
-    #     run: |
-    #       if [[ ${{ github.event_name }} == 'pull_request' && contains(lint-build-and-test.result, 'failure') ]]; then
-    #         echo "Pull request failed on ${{ github.ref }}.";
-    #         echo "::set-output name=status::failure";
-    #       elif [[ ${{ github.event_name }} == 'push' && ${{ github.ref }} == 'refs/heads/main' ]]; then
-    #         echo "Push to main detected, notifying success to Discord.";
-    #         echo "::set-output name=status::success";
-    #       elif [[ ${{ github.event_name }} == 'pull_request' && ${{ github.event.action }} == 'opened' ]]; then
-    #         echo "New Pull request opened. ${{ github.ref }} ";
-    #         echo "::set-output name=status::success"; 
-    #       fi
-    #   - name: Send Notification to Discord
-    #     if: steps.check-status.outputs.status == 'failure' || steps.check-status.outputs.status == 'success'       
-    #     uses: tsickert/discord-webhook@v6.0.0
-    #     with:
-    #       webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
-    #       message: |
-    #         {
-    #           "content": "Pipeline Status: ${{ steps.check-status.outputs.status }}\n
-    #                       Reason: ${{ github.event_name }} event\n
-    #                       Commit: ${{ github.sha }}\n
-    #                       Trigger: ${{ github.event_name }} event\n
-    #                       Status: ${{ steps.check-status.outputs.status }}"
-    #         }
