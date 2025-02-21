@@ -24,9 +24,7 @@ describe("Desktop tests", () => {
         <NavigationBar />
       </MemoryRouter>,
     );
-    expect((await screen.findByText("Home")).getAttribute("href")).toBe(
-      "/home",
-    );
+    expect((await screen.findByText("Home")).getAttribute("href")).toBe("/");
   });
 
   it("After rendering navigation bar - the Perseverance link takes to the Perseverance page", async () => {
