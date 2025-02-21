@@ -13,7 +13,7 @@ describe("Desktop tests", () => {
     );
     expect(await screen.findByText("Home")).toBeVisible();
     expect(await screen.findByText("Perseverance")).toBeVisible();
-    expect(await screen.findByText("Curiousity")).toBeVisible();
+    expect(await screen.findByText("Curiosity")).toBeVisible();
     expect(await screen.findByText("Spirit")).toBeVisible();
     expect(await screen.findByText("Opportunity")).toBeVisible();
   });
@@ -57,8 +57,8 @@ describe("Desktop tests", () => {
         <NavigationBar />
       </MemoryRouter>,
     );
-    expect((await screen.findByText("Curiousity")).getAttribute("href")).toBe(
-      "/rover/curiousity",
+    expect((await screen.findByText("Curiosity")).getAttribute("href")).toBe(
+      "/rover/curiosity",
     );
   });
 
