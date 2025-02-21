@@ -20,7 +20,7 @@ jobs:
     needs: [lint-build-and-test]
     steps: 
       - name: Notify Discord if failed
-        if: ${{ needs.lint-build-and-test.result == 'failure' }}
+        if: ${{ needs.lint-build-and-test.result == 'failure' || needs.lint-build-and-test.result == 'Error'}}
         uses: tsickert/discord-webhook@v6.0.0
         with:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
