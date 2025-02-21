@@ -6,7 +6,8 @@ describe("MarsRoverImageViewerModal", () => {
   const imageURL = "https://picsum.photos/id/600/1600/900.jpg";
   const imageData = "TestData";
   const mockFunction = jest.fn();
-  it("renders the modal with the image and descrption", () => {
+
+  it("renders the Mars Rover Image Viewer modal with the image and description", () => {
     render(
       <MarsRoverImageViewerModal
         imageUrl={imageURL}

@@ -1,61 +1,54 @@
  @import '../../styles/global.scss';
 
- $max-width:800px;
+ $max-width: 800px;
 
- .modalContainer{
-    // width:30%;
-    max-width: $max-width;
-    // margin: 100px 70px 80px 345px;
-}
- 
+//  .modalContainer {
+//      max-width: $max-width;
+//  }
 
-.modalClass{
-    max-width: $max-width;
-    margin: 100px 100px 100px 500px;
-    outline:none;
-    border:1px solid gray;
-    background-color: $background-secondary;
-    padding: $padding-default +20px;
-    border-radius: $border-radius;
-    position: fixed;
-    align-items: center;
-    overflow: hidden;
+ .modalClass {
+     max-width: $max-width;
+     margin: 100px 100px 100px 500px;
+     outline: none;
+     border: 1px solid gray;
+     background-color: $background-secondary;
+     padding: $padding-default +20px;
+     border-radius: $border-radius;
+     position: fixed;
+     overflow: hidden;
 
-    @media (max-width: 500px){
-        margin: 100px 5px 30px;
-        width: 95%;
-        max-width: 80%;
-    }    
-}
+     @media (max-width: 500px) {
+         margin: 100px 5px 30px;
+         //width: 95%;
+        //  max-width: 80%;
+     }
+ }
 
-.closeButtonClass{
-    border:2px solid $background-primary;    
-    background-color:$background-secondary;
-    color: $background-primary;
-    cursor:pointer;
-    position:absolute;
-    top:3px;
-    right:8px;
-    height: 23px;
-    border-radius: 4px;
-    font-size:0.80rem;
-    font-weight:bolder;
-}
-    
-.imageDescriptionClass{
-    font-size: $font-size-normal;
-    text-align: center;
-}
+ .closeButtonClass {
+     border: 2px solid $background-primary;
+     background-color: $background-secondary;
+     color: $background-primary;
+     cursor: pointer;
+     position: absolute;
+     top: 3px;
+     right: 8px;
+     height: 23px;
+     border-radius: 4px;
+     font-size: 0.80rem;
+     font-weight: bolder;
+ }
 
-.imageClass{
+ .imageDescriptionClass {
+     font-size: $font-size-normal;
+     text-align: center;
+ }
 
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    border-radius: $border-radius;
-
-    @media(max-width: 500px)
-    {
-        max-width: 100%;
+ .imageClass {
+     max-width: $max-width - 320px;
+     height: auto;
+     border-radius: $border-radius;
+    //  object-fit:cover;
+     @media(max-width: 500px) {
+         width: 100%;
     }
-}
+ }
