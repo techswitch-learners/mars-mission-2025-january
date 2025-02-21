@@ -44,7 +44,7 @@ export const MarsRoverPhotoViewer = ({
     let day: string;
     if (sol) {
       day = `sol=${sol}`;
-    } else if (earth_date){
+    } else if (earth_date) {
       const date = (earth_date as Date).toISOString().slice(0, 10);
       day = `earth_date=${date}`;
     }
